@@ -1,0 +1,69 @@
+Name,Descripcion,Dtype,tabla,n tabla
+row_id,id de fila,int,transfers,6
+subject_id,id de paciente,int,transfers,6
+hadm_id,id de admisión,int,transfers,6
+icustay_id,id de custodio o persona a cargo del paciente (a confirmar),float,transfers,6
+dbsource,fuente de datos (ej: carevue es un sistema de monitoreo de pacientes),object,transfers,6
+eventtype,tipo de evento (Ej: transfer o admission),object,transfers,6
+prev_careunit,unidad de cuidado previo,object,transfers,6
+curr_careunit,unidad de cuidado actual,object,transfers,6
+prev_wardid,Id de la sala previa del paciente.,float,transfers,6
+curr_wardid,id de la sala actual del paciente.,float,transfers,6
+intime,hora y fecha en que el paciente fue trasladado a la unidad.,object,transfers,6
+outtime,hora y fecha en que el paciente fue trasladado fuera de la unidad.,object,transfers,6
+los,Duración de la estancia en la unidad en minutos (Dif entre outtime y intime),float,transfers,6
+row_id,id de fila,int,caregivers,7
+cgid,id del cuidador,int,caregivers,7
+label,Título del cuidador,object,caregivers,7
+description,descripcion mas detallada del cuidador.,object,caregivers,7
+row_id,id de fila,int64,chartevents,8
+subject_id,id de referencia al paciente,int64,chartevents,8
+hadm_id,id de referencia a la admisión.,int64,chartevents,8
+icustay_id,id de referencia de custodio,float64,chartevents,8
+itemid,id de referencia al elemento graficado,int64,chartevents,8
+charttime,Hora en que ocurrió el evento,object,chartevents,8
+storetime,Hora en que se registró el evento en el sistema,object,chartevents,8
+cgid,id de referencia del cuidador,int64,chartevents,8
+value,valor del evento (texto),object,chartevents,8
+valuenum,valor del evento (numero),float64,chartevents,8
+valueuom,Unidad de medida,object,chartevents,8
+warning,"valor binario (0 o 1), 1 verdadero y 0 falso, indica advertencia",float64,chartevents,8
+error,"valor binario (0 o 1), 1 verdadero y 0 falso, Marca para resaltar un error con el evento",float64,chartevents,8
+resultstatus,estado de resultado de los datos de laboratorio,object,chartevents,8
+stopped,indica que un evento esta en estado detenido.,object,chartevents,8
+row_id,id de fila,int,datetimeevents,9
+subject_id,id de referencia al paciente,int,datetimeevents,9
+hadm_id,id de referencia a la admisión,int,datetimeevents,9
+icustay_id,id de referencia al custodio,float,datetimeevents,9
+itemid,id de referencia al item,int,datetimeevents,9
+charttime,cuando ocurrió el evento,object,datetimeevents,9
+storetime,cuando el evento fue registrado en el sistema,object,datetimeevents,9
+cgid,id de referencia al cuidador,int,datetimeevents,9
+value,valor del evento (texto),object,datetimeevents,9
+valueuom,unidad de medida,object,datetimeevents,9
+warning,"valor binario (1 y 0), 1 verdadero y 0 falso, indica advertencia",float,datetimeevents,9
+error,"valor binario (1 y 0), 1 verdadero y 0 falso, indica error",float,datetimeevents,9
+resultstatus,estado de resultado del laboratorio de datos,float,datetimeevents,9
+stopped,Marca que el evento está detenido (rara vez se usa),object,datetimeevents,9
+row_id,id unico del registro,int,inputevents_cv,10
+subject_id,id de referencia del paciente,int,inputevents_cv,10
+hadm_id,id de referencia de admisión,int,inputevents_cv,10
+icustay_id,id de referencia al cuidador,int,inputevents_cv,10
+charttime,Hora en que se inició o recibió la entrada,object,inputevents_cv,10
+itemid,id de referencia a item,int,inputevents_cv,10
+amount,Importe del artículo administrado al paciente,float,inputevents_cv,10
+amountuom,unidad de medida del importe,object,inputevents_cv,10
+rate,tasa a la cual se comienza administrar al paciente,float,inputevents_cv,10
+rateuom,unidad de medida de la tasa,object,inputevents_cv,10
+storetime,momento en que el evento fue registrado en el sistema,object,inputevents_cv,10
+cgid,id de referencia al cuidador,float,inputevents_cv,10
+orderid,Identificador que vincula elementos que se agrupan en una solución,int,inputevents_cv,10
+linkorderid,Identificador que vincula pedidos a través de múltiples administraciones,int,inputevents_cv,10
+stopped,marca que indica que el evento fue detenido (raramente usado),object,inputevents_cv,10
+newbottle,Indica cuándo se colgó una nueva botella de la solución al lado de la cama.,float,inputevents_cv,10
+originalamount,Importe del artículo que se registró originalmente,float,inputevents_cv,10
+originalamountuom,unidad de medida del importe original,object,inputevents_cv,10
+originalroute,Vía de administración elegida originalmente para el artículo,object,inputevents_cv,10
+originalrate,Tasa de administración elegida originalmente para el artículo,float,inputevents_cv,10
+originalrateuom,Unidad de medida del importe elegido originalmente,object,inputevents_cv,10
+originalsite,Sitio anatómico para la administración original del artículo.,object,inputevents_cv,10
