@@ -1,0 +1,58 @@
+Name,Descripcion,Dtype,tabla,n tabla
+row_id,Identificador de fila único,INT,DIAGNOSES_ICD,16
+subject_id,ID del Paciente,INT,DIAGNOSES_ICD,16
+hadm_id,Id de Admisiones,INT,DIAGNOSES_ICD,16
+seq_num,Prioridad del código. La secuencia 1 es el código principal,INT,DIAGNOSES_ICD,16
+icd9_code,Clasificación Internacional de Enfermedades,VARCHAR(10),DIAGNOSES_ICD,16
+row_id,Identificador de la Fila,INT,DRGCODES,17
+subject_id,ID del Paciente,INT,DRGCODES,17
+hadm_id,Id de Admisiones,INT,DRGCODES,17
+drg_type,Tipo de grupo relacionado con el diagnóstico,VARCHAR(20),DRGCODES,17
+drg_code,Código de grupo relacionado con el diagnóstico,VARCHAR(20),DRGCODES,17
+description,Descripción del DRG,VARCHAR(300),DRGCODES,17
+drg_severity,Gravedad relativa,SMALLINT,DRGCODES,17
+drg_mortality,Mortalidad relativa,SMALLINT,DRGCODES,17
+row_id,Identificador de fila único,INT,DIAGNOSES_ICD,18
+subject_id,ID del Paciente,INT,DIAGNOSES_ICD,18
+hadm_id,Id de Admisiones,INT,DIAGNOSES_ICD,18
+itemid,Referencia a la tabla D_LABITEMS,INT,DIAGNOSES_ICD,18
+charttime,Momento en que ocurrió el evento,TIMESTAMP(0),DIAGNOSES_ICD,18
+value,Valor del evento en formato texto,VARCHAR(200),DIAGNOSES_ICD,18
+valuenum,Valor del evento como un número,DOUBLE PRECISION,DIAGNOSES_ICD,18
+valueuom,Unidad de medida,VARCHAR(20),DIAGNOSES_ICD,18
+flag,Estado del valor de la prueba de laboratorio (NULL = normal),VARCHAR(20),DIAGNOSES_ICD,18
+row_id,Identificador de fila único,INT,MICROBIOLOGYEVENTS,19
+subject_id,ID del Paciente,INT,MICROBIOLOGYEVENTS,19
+hadm_id,Id de Admisiones,INT,MICROBIOLOGYEVENTS,19
+chartdate,Fecha en que ocurrió el evento,TIMESTAMP(0),MICROBIOLOGYEVENTS,19
+charttime,Hora en que ocurrió el evento,TIMESTAMP(0),MICROBIOLOGYEVENTS,19
+spec_itemid,Identifica el espécimen,INT,MICROBIOLOGYEVENTS,19
+spec_type_desc,Descripción del espécimen,VARCHAR(100),MICROBIOLOGYEVENTS,19
+org_itemid,Identifica el organismo,INT,MICROBIOLOGYEVENTS,19
+org_name,Nombre del organismo,VARCHAR(100),MICROBIOLOGYEVENTS,19
+isolate_num,Número aislado asociado a la prueba,SMALLINT,MICROBIOLOGYEVENTS,19
+ab_itemid,Identifica el anticuerpo,INT,MICROBIOLOGYEVENTS,19
+ab_name,Nombre del anticuerpo utilizado,VARCHAR(30),MICROBIOLOGYEVENTS,19
+dilution_text,La cantidad de dilución probada y la comparación que se hizo,VARCHAR(10),MICROBIOLOGYEVENTS,19
+dilution_comparison,El componente de comparación de DILUTION_TEXT,VARCHAR(20),MICROBIOLOGYEVENTS,19
+dilution_value,El valor del componente DILUTION_TEXT,DOUBLE PRECISION,MICROBIOLOGYEVENTS,19
+interpretation,Interpretación de la prueba,VARCHAR(5),MICROBIOLOGYEVENTS,19
+row_id,Identificador de fila único,INT,PRESCRIPTIONS,20
+subject_id,ID del Paciente,INT,PRESCRIPTIONS,20
+hadm_id,ID del Admisiones,INT,PRESCRIPTIONS,20
+icustay_id,Referencia a ICUSTAYS,INT,PRESCRIPTIONS,20
+startdate,Fecha en que comenzó la prescripción,TIMESTAMP(0),PRESCRIPTIONS,20
+enddate,Fecha en que terminó la prescripción,TIMESTAMP(0),PRESCRIPTIONS,20
+drug_type,tipo de droga,VARCHAR(100),PRESCRIPTIONS,20
+drug,nombre de la droga,VARCHAR(100),PRESCRIPTIONS,20
+drug_name_poe,Nombre del medicamento en la interfaz de entrada de pedidos del proveedor,VARCHAR(100),PRESCRIPTIONS,20
+drug_name_generic,nombre genérico de la droga,VARCHAR(100),PRESCRIPTIONS,20
+formulary_drug_cd,Código de medicamento del formulario,VARCHAR(120),PRESCRIPTIONS,20
+gsn,Número de secuencia genérico,VARCHAR(200),PRESCRIPTIONS,20
+ndc,Código Nacional de Drogas,VARCHAR(120),PRESCRIPTIONS,20
+prod_strength,Fuerza de la droga (producto),VARCHAR(120),PRESCRIPTIONS,20
+dose_val_rx,Dosis del fármaco prescrito,VARCHAR(120),PRESCRIPTIONS,20
+dose_unit_rx,Unidad de medida asociada a la dosis,VARCHAR(120),PRESCRIPTIONS,20
+form_val_disp,Cantidad de la fórmula dispensada,VARCHAR(120),PRESCRIPTIONS,20
+form_unit_disp,Unidad de medida asociada a la formulación,VARCHAR(120),PRESCRIPTIONS,20
+route,Vía de administración,VARCHAR(120),PRESCRIPTIONS,20
