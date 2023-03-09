@@ -1,0 +1,14 @@
+Name,Descripcion,Dtype,Tabla
+row_id,Identificador unico de linea,int64,OUTPUTEVENTS
+subject_id,Identificador para los pacientes,int64,OUTPUTEVENTS
+hadm_id,Identificador para las admiciones,int64,OUTPUTEVENTS
+icustay_id,Identificador de estancia,float64,OUTPUTEVENTS
+charttime,Hora de un evento de salida,object,OUTPUTEVENTS
+itemid,Identificador de item,int64,OUTPUTEVENTS
+value,La cantidad de sustancia en CHARTTIME,float64,OUTPUTEVENTS
+valueuom,Unidad de medida de la sustancia,object,OUTPUTEVENTS
+storetime,Hora en que se registro el evento en sistema,object,OUTPUTEVENTS
+cgid,Identificador del cuidador,int64,OUTPUTEVENTS
+stopped,Indica si el pedido se detuvo en CHARTTIME dado,float64,OUTPUTEVENTS
+newbottle,Indica que se colgo una nueva bolsa de solucion en CHARTTIME determinado,float64,OUTPUTEVENTS
+iserror,"En Metavision, indicador de checkbox para un error de observacion",float64,OUTPUTEVENTS

@@ -1,0 +1,26 @@
+Name,Descripcion,Dtype,Tabla
+row_id,Identificador de linea,int64,PROCEDUREEVENTS_MV
+subject_id,Identificador para los pacientes,int64,PROCEDUREEVENTS_MV
+hadm_id,Identificador para las admiciones,int64,PROCEDUREEVENTS_MV
+icustay_id,Identificador de estancia,int64,PROCEDUREEVENTS_MV
+starttime,Hora de inicio del evento,object,PROCEDUREEVENTS_MV
+endtime,Hora de termino del evento,object,PROCEDUREEVENTS_MV
+itemid,Identificador del item,int64,PROCEDUREEVENTS_MV
+value,Valor del evento,int64,PROCEDUREEVENTS_MV
+valueuom,Unidad de medida,object,PROCEDUREEVENTS_MV
+location,Localizacion del malestar,object,PROCEDUREEVENTS_MV
+locationcategory,Tiempo en que se regisstro el evento en sistema,object,PROCEDUREEVENTS_MV
+storetime,Identificador del cuidador,object,PROCEDUREEVENTS_MV
+cgid,Identificador que vincula elementos que se agrupan en una solucion,int64,PROCEDUREEVENTS_MV
+orderid,Identificador que vincula pedidos a traves de multiples administraciones,int64,PROCEDUREEVENTS_MV
+linkorderid,Grupo al que corresponde el item,int64,PROCEDUREEVENTS_MV
+ordercategoryname,Grupo secondario para aquellos items con mas de una agrupacion,object,PROCEDUREEVENTS_MV
+secondaryordercategoryname,La funcion del item administrado,float64,PROCEDUREEVENTS_MV
+ordercategorydescription,Tipo de item administradoSubcategoria de la localizacion del malestar,object,PROCEDUREEVENTS_MV
+isopenbag,Indica si la bolsa que contiene la solucion esta abierta,int64,PROCEDUREEVENTS_MV
+continueinnextdept,Indica si el item continuara o si se transfiere,int64,PROCEDUREEVENTS_MV
+cancelreason,Razon de cancelacion,int64,PROCEDUREEVENTS_MV
+statusdescription,"Estado actual del pedido: Detenido, Reescrito, en ejecucion, cancelado",object,PROCEDUREEVENTS_MV
+comments_editedby,Titulo del cuidador que edito la orden,object,PROCEDUREEVENTS_MV
+comments_canceledby,Titulo del cuidador que cancelo la orden,object,PROCEDUREEVENTS_MV
+comments_date,Hora en que el cuidador cancelo o edito la orden,object,PROCEDUREEVENTS_MV
