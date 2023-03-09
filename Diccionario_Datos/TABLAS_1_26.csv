@@ -1,0 +1,325 @@
+,Name,Descripcion,Dtype,tabla,n tabla
+0,row_id,(Obsoleto) Identificador de fila único,int,admissions,1
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,admissions,1
+2,hadm_id,Identificador único para cada estancia hospitalaria,int,admissions,1
+3,admittime,Hora de ingreso,Date,admissions,1
+4,dischtime,Hora de alta,Date,admissions,1
+5,deathtime,Hora de la muerte,Date,admissions,1
+6,admission_type,Tipo de admisión [ejemplo: emergencia o electiva],O,admissions,1
+7,admission_location,Lugar de admisión,O,admissions,1
+8,discharge_location,Lugar de alta,O,admissions,1
+9,insurance,Tipo de seguro,O,admissions,1
+10,language,Idioma,O,admissions,1
+11,religion,Religión,O,admissions,1
+12,marital_status,Estado civil,O,admissions,1
+13,ethnicity,Etnicidad,O,admissions,1
+14,edregtime,Tiempo que el paciente estuvo registrado en el servicio de urgencias,Date,admissions,1
+15,edouttime,Tiempo en que el paciente fue dado de alta del servicio de urgencias,Date,admissions,1
+16,diagnosis,Diagnostico(Enfermedad o lesión),O,admissions,1
+17,hospital_expire_flag,-,int,admissions,1
+18,has_chartevents_data,Tiene al menos una observación en la tabla CHARTEVENTS,int,admissions,1
+19,row_id,(Obsoleto) Identificador de fila único,int,callout,2
+20,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,callout,2
+21,hadm_id,Identificador único para cada estancia hospitalaria,int,callout,2
+22,submit_wardid,Identifica el distrito donde se envió la solicitud de llamada,int,callout,2
+23,submit_careunit,"Sala donde se envió la llamada, si es una unidad de atención, se incluye el tipo de UCI aquí",O,callout,2
+24,curr_wardid,Sala donde reside actualmente el paciente,int,callout,2
+25,curr_careunit,"Si actualmente se encuentra en una unidad de cuidados, el tipo de UCI se indica aquí",O,callout,2
+26,callout_wardid,"Dónde se va a dar de alta al paciente, 0 = domicilio, 1 = primero disponible pabellón",int,callout,2
+27,callout_service,Identifica el servicio al que se llama al paciente,O,callout,2
+28,request_tele,Indica si se requieren precauciones especiales [telemetría],int,callout,2
+29,request_resp,Indica si se requieren precauciones especiales [respiratoria],int,callout,2
+30,request_cdiff,Indica si se requieren precauciones especiales [infección C dif],int,callout,2
+31,request_mrsa,Indica si se requieren precauciones especiales [infección por SARM],int,callout,2
+32,request_vre,Indica si se requieren precauciones especiales [infección por VRE],int,callout,2
+33,callout_status,Estado actual de la solicitud de llamada,O,callout,2
+34,callout_outcome,Resultado [cancelación o alta],O,callout,2
+35,discharge_wardid,La sala a la que fue dado de alta el paciente,float,callout,2
+36,acknowledge_status,Estado de la respuesta a la solicitud de llamada,O,callout,2
+37,createtime,Hora y fecha en que se inició la llamada,Date,callout,2
+38,updatetime,Última vez que se actualizó el evento de llamada,Date,callout,2
+39,acknowledgetime,Hora a la que se acusó recibo de la solicitud de llamada,Date,callout,2
+40,outcometime,Hora en que se produjo (cancelación o baja),Date,callout,2
+41,firstreservationtime,Primera vez que se reservó una sala para la solicitud de llamada,Date,callout,2
+42,currentreservationtime,Última hora en que se reservó un barrio para la solicitud de llamada,Date,callout,2
+43,row_id,(Obsoleto) Identificador de fila único,int,icustays,3
+44,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,icustays,3
+45,hadm_id,Identificador único para cada estancia hospitalaria,int,icustays,3
+46,icustay_id,Identificador único para la estancia en la UCI,int,icustays,3
+47,dbsource,Base de datos de origen del artículo,O,icustays,3
+48,first_careunit,Primera unidad de cuidados asociada a la estancia en UCI,O,icustays,3
+49,last_careunit,Última unidad asociada a la estancia en UCI,O,icustays,3
+50,first_wardid,Identificador de la ubicación de la primera sala del paciente,int,icustays,3
+51,last_wardid,Identificador de la ubicación de la última sala del paciente,int,icustays,3
+52,intime,Tiempo de ingreso a la UCI,Date,icustays,3
+53,outtime,Hora de alta de la UCI,Date,icustays,3
+54,los,Duración de la estancia en la UCI en minutos,float,icustays,3
+55,row_id,(Obsoleto) Identificador de fila único,int,patients,4
+56,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,patients,4
+57,gender,"Genero [masculino, femenino]",O,patients,4
+58,dob,Fecha de nacimiento,Date,patients,4
+59,dod,Fecha de muerte,Date,patients,4
+60,dod_hosp,Fecha de la muerte registrada en los registros del hospital,Date,patients,4
+61,dod_ssn,Fecha de la muerte registrada en los registros de seguridad social,Date,patients,4
+62,expire_flag,Bandera que indica que la patente ha muerto,int,patients,4
+63,row_id,(Obsoleto) Identificador de fila único,int,services,5
+64,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,services,5
+65,hadm_id,Identificador único para cada estancia hospitalaria,int,services,5
+66,transfertime,Hora en que se produjo la transferencia,Date,services,5
+67,prev_service,Tipo de servicio anterior,O,services,5
+68,curr_service,Tipo de servicio actual,O,services,5
+69,row_id,id de fila,int,transfers,6
+70,subject_id,id de paciente,int,transfers,6
+71,hadm_id,id de admisión,int,transfers,6
+72,icustay_id,id de custodio o persona a cargo del paciente (a confirmar),float,transfers,6
+73,dbsource,fuente de datos (ej: carevue es un sistema de monitoreo de pacientes),object,transfers,6
+74,eventtype,tipo de evento (Ej: transfer o admission),object,transfers,6
+75,prev_careunit,unidad de cuidado previo,object,transfers,6
+76,curr_careunit,unidad de cuidado actual,object,transfers,6
+77,prev_wardid,Id de la sala previa del paciente.,float,transfers,6
+78,curr_wardid,id de la sala actual del paciente.,float,transfers,6
+79,intime,hora y fecha en que el paciente fue trasladado a la unidad.,object,transfers,6
+80,outtime,hora y fecha en que el paciente fue trasladado fuera de la unidad.,object,transfers,6
+81,los,Duración de la estancia en la unidad en minutos (Dif entre outtime y intime),float,transfers,6
+82,row_id,id de fila,int,caregivers,7
+83,cgid,id del cuidador,int,caregivers,7
+84,label,Título del cuidador,object,caregivers,7
+85,description,descripcion mas detallada del cuidador.,object,caregivers,7
+86,row_id,id de fila,int64,chartevents,8
+87,subject_id,id de referencia al paciente,int64,chartevents,8
+88,hadm_id,id de referencia a la admisión.,int64,chartevents,8
+89,icustay_id,id de referencia de custodio,float64,chartevents,8
+90,itemid,id de referencia al elemento graficado,int64,chartevents,8
+91,charttime,Hora en que ocurrió el evento,object,chartevents,8
+92,storetime,Hora en que se registró el evento en el sistema,object,chartevents,8
+93,cgid,id de referencia del cuidador,int64,chartevents,8
+94,value,valor del evento (texto),object,chartevents,8
+95,valuenum,valor del evento (numero),float64,chartevents,8
+96,valueuom,Unidad de medida,object,chartevents,8
+97,warning,"valor binario (0 o 1), 1 verdadero y 0 falso, indica advertencia",float64,chartevents,8
+98,error,"valor binario (0 o 1), 1 verdadero y 0 falso, Marca para resaltar un error con el evento",float64,chartevents,8
+99,resultstatus,estado de resultado de los datos de laboratorio,object,chartevents,8
+100,stopped,indica que un evento esta en estado detenido.,object,chartevents,8
+101,row_id,id de fila,int,datetimeevents,9
+102,subject_id,id de referencia al paciente,int,datetimeevents,9
+103,hadm_id,id de referencia a la admisión,int,datetimeevents,9
+104,icustay_id,id de referencia al custodio,float,datetimeevents,9
+105,itemid,id de referencia al item,int,datetimeevents,9
+106,charttime,cuando ocurrió el evento,object,datetimeevents,9
+107,storetime,cuando el evento fue registrado en el sistema,object,datetimeevents,9
+108,cgid,id de referencia al cuidador,int,datetimeevents,9
+109,value,valor del evento (texto),object,datetimeevents,9
+110,valueuom,unidad de medida,object,datetimeevents,9
+111,warning,"valor binario (1 y 0), 1 verdadero y 0 falso, indica advertencia",float,datetimeevents,9
+112,error,"valor binario (1 y 0), 1 verdadero y 0 falso, indica error",float,datetimeevents,9
+113,resultstatus,estado de resultado del laboratorio de datos,float,datetimeevents,9
+114,stopped,Marca que el evento está detenido (rara vez se usa),object,datetimeevents,9
+115,row_id,id unico del registro,int,inputevents_cv,10
+116,subject_id,id de referencia del paciente,int,inputevents_cv,10
+117,hadm_id,id de referencia de admisión,int,inputevents_cv,10
+118,icustay_id,id de referencia al cuidador,int,inputevents_cv,10
+119,charttime,Hora en que se inició o recibió la entrada,object,inputevents_cv,10
+120,itemid,id de referencia a item,int,inputevents_cv,10
+121,amount,Importe del artículo administrado al paciente,float,inputevents_cv,10
+122,amountuom,unidad de medida del importe,object,inputevents_cv,10
+123,rate,tasa a la cual se comienza administrar al paciente,float,inputevents_cv,10
+124,rateuom,unidad de medida de la tasa,object,inputevents_cv,10
+125,storetime,momento en que el evento fue registrado en el sistema,object,inputevents_cv,10
+126,cgid,id de referencia al cuidador,float,inputevents_cv,10
+127,orderid,Identificador que vincula elementos que se agrupan en una solución,int,inputevents_cv,10
+128,linkorderid,Identificador que vincula pedidos a través de múltiples administraciones,int,inputevents_cv,10
+129,stopped,marca que indica que el evento fue detenido (raramente usado),object,inputevents_cv,10
+130,newbottle,Indica cuándo se colgó una nueva botella de la solución al lado de la cama.,float,inputevents_cv,10
+131,originalamount,Importe del artículo que se registró originalmente,float,inputevents_cv,10
+132,originalamountuom,unidad de medida del importe original,object,inputevents_cv,10
+133,originalroute,Vía de administración elegida originalmente para el artículo,object,inputevents_cv,10
+134,originalrate,Tasa de administración elegida originalmente para el artículo,float,inputevents_cv,10
+135,originalrateuom,Unidad de medida del importe elegido originalmente,object,inputevents_cv,10
+136,originalsite,Sitio anatómico para la administración original del artículo.,object,inputevents_cv,10
+137,row_id,Identificador de linea,int64,INPUTEVENTS_MV,11
+138,subject_id,Identificador para los pacientes,int64,INPUTEVENTS_MV,11
+139,hadm_id,Identificador para las admiciones,int64,INPUTEVENTS_MV,11
+140,icustay_id,Identificador de estancia,int64,INPUTEVENTS_MV,11
+141,starttime,Tiempo de inicio del evento,object,INPUTEVENTS_MV,11
+142,endtime,Tiempo de fin del evento,object,INPUTEVENTS_MV,11
+143,itemid,Identificador de item,int64,INPUTEVENTS_MV,11
+144,amount,Cantidad del item suministrada al paciente,float64,INPUTEVENTS_MV,11
+145,amountuom,Unidad de medida de la cantidad,object,INPUTEVENTS_MV,11
+146,rate,Velocidad a la que se suministra el item al paciente,float64,INPUTEVENTS_MV,11
+147,rateuom,Unidad de medida de la velocidad,object,INPUTEVENTS_MV,11
+148,storetime,Tiempo en que se registro el evento en el sistema,object,INPUTEVENTS_MV,11
+149,cgid,Identificador del cuidador,int64,INPUTEVENTS_MV,11
+150,orderid,Identificador que vincula elementos que se agrupan en una solucion,int64,INPUTEVENTS_MV,11
+151,linkorderid,Identificador que vincula pedidos a traves de multiples administraciones,int64,INPUTEVENTS_MV,11
+152,ordercategoryname,Grupo al que corresponde el item,object,INPUTEVENTS_MV,11
+153,secondaryordercategoryname,Grupo secondario para aquellos items con mas de una agrupacion,object,INPUTEVENTS_MV,11
+154,ordercomponenttypedescription,La funcion del item administrado,object,INPUTEVENTS_MV,11
+155,ordercategorydescription,Tipo de item administrado,object,INPUTEVENTS_MV,11
+156,patientweight,Peso del paciente para el calculo de la medicacion,float64,INPUTEVENTS_MV,11
+157,totalamount,Cantidad total en la solucion para el articulo dado,float64,INPUTEVENTS_MV,11
+158,totalamountuom,Unidad de medida para la cantidad total del item,object,INPUTEVENTS_MV,11
+159,isopenbag,Indica si la bolsa que contiene la solucion esta abierta,int64,INPUTEVENTS_MV,11
+160,continueinnextdept,Indica si el item continuara o si se transfiere,int64,INPUTEVENTS_MV,11
+161,cancelreason,Razon de cancelacion,int64,INPUTEVENTS_MV,11
+162,statusdescription,"Estado actual del pedido: Detenido, Reescrito, en ejecucion, cancelado",object,INPUTEVENTS_MV,11
+163,comments_editedby,Titulo del cuidador que edito la orden,object,INPUTEVENTS_MV,11
+164,comments_canceledby,Titulo del cuidador que cancelo la orden,object,INPUTEVENTS_MV,11
+165,comments_date,Hora en que el cuidador cancelo o edito la orden,object,INPUTEVENTS_MV,11
+166,originalamount,Cantidad del item que se registro originalmente,float64,INPUTEVENTS_MV,11
+167,originalrate,Velocidad elegida originalmente para el item,float64,INPUTEVENTS_MV,11
+168,row_id,Identificador unico de linea,NO DATA,NOTEEVENTS,12
+169,subject_id,Identificador para los pacientes,NO DATA,NOTEEVENTS,12
+170,hadm_id,Identificador para las admiciones,NO DATA,NOTEEVENTS,12
+171,chartdate,Fecha en que se hizo la nota,NO DATA,NOTEEVENTS,12
+172,charttime,Fecha y hora en que se trazo la nota,NO DATA,NOTEEVENTS,12
+173,storetime,Hora en que se registro el evento en el sistema,NO DATA,NOTEEVENTS,12
+174,category,Categoria de la nota,NO DATA,NOTEEVENTS,12
+175,description,Categorizacion mas detallada de la nota,NO DATA,NOTEEVENTS,12
+176,cgid,Identificador del cuidador,NO DATA,NOTEEVENTS,12
+177,iserror,Marca para resaltar un error con la nota,NO DATA,NOTEEVENTS,12
+178,text,Contenido de la nota,NO DATA,NOTEEVENTS,12
+179,row_id,Identificador unico de linea,int64,OUTPUTEVENTS,13
+180,subject_id,Identificador para los pacientes,int64,OUTPUTEVENTS,13
+181,hadm_id,Identificador para las admiciones,int64,OUTPUTEVENTS,13
+182,icustay_id,Identificador de estancia,float64,OUTPUTEVENTS,13
+183,charttime,Hora de un evento de salida,object,OUTPUTEVENTS,13
+184,itemid,Identificador de item,int64,OUTPUTEVENTS,13
+185,value,La cantidad de sustancia en CHARTTIME,float64,OUTPUTEVENTS,13
+186,valueuom,Unidad de medida de la sustancia,object,OUTPUTEVENTS,13
+187,storetime,Hora en que se registro el evento en sistema,object,OUTPUTEVENTS,13
+188,cgid,Identificador del cuidador,int64,OUTPUTEVENTS,13
+189,stopped,Indica si el pedido se detuvo en CHARTTIME dado,float64,OUTPUTEVENTS,13
+190,newbottle,Indica que se colgo una nueva bolsa de solucion en CHARTTIME determinado,float64,OUTPUTEVENTS,13
+191,iserror,"En Metavision, indicador de checkbox para un error de observacion",float64,OUTPUTEVENTS,13
+192,row_id,Identificador de linea,int64,PROCEDUREEVENTS_MV,14
+193,subject_id,Identificador para los pacientes,int64,PROCEDUREEVENTS_MV,14
+194,hadm_id,Identificador para las admiciones,int64,PROCEDUREEVENTS_MV,14
+195,icustay_id,Identificador de estancia,int64,PROCEDUREEVENTS_MV,14
+196,starttime,Hora de inicio del evento,object,PROCEDUREEVENTS_MV,14
+197,endtime,Hora de termino del evento,object,PROCEDUREEVENTS_MV,14
+198,itemid,Identificador del item,int64,PROCEDUREEVENTS_MV,14
+199,value,Valor del evento,int64,PROCEDUREEVENTS_MV,14
+200,valueuom,Unidad de medida,object,PROCEDUREEVENTS_MV,14
+201,location,Localizacion del malestar,object,PROCEDUREEVENTS_MV,14
+202,locationcategory,Tiempo en que se regisstro el evento en sistema,object,PROCEDUREEVENTS_MV,14
+203,storetime,Identificador del cuidador,object,PROCEDUREEVENTS_MV,14
+204,cgid,Identificador que vincula elementos que se agrupan en una solucion,int64,PROCEDUREEVENTS_MV,14
+205,orderid,Identificador que vincula pedidos a traves de multiples administraciones,int64,PROCEDUREEVENTS_MV,14
+206,linkorderid,Grupo al que corresponde el item,int64,PROCEDUREEVENTS_MV,14
+207,ordercategoryname,Grupo secondario para aquellos items con mas de una agrupacion,object,PROCEDUREEVENTS_MV,14
+208,secondaryordercategoryname,La funcion del item administrado,float64,PROCEDUREEVENTS_MV,14
+209,ordercategorydescription,Tipo de item administradoSubcategoria de la localizacion del malestar,object,PROCEDUREEVENTS_MV,14
+210,isopenbag,Indica si la bolsa que contiene la solucion esta abierta,int64,PROCEDUREEVENTS_MV,14
+211,continueinnextdept,Indica si el item continuara o si se transfiere,int64,PROCEDUREEVENTS_MV,14
+212,cancelreason,Razon de cancelacion,int64,PROCEDUREEVENTS_MV,14
+213,statusdescription,"Estado actual del pedido: Detenido, Reescrito, en ejecucion, cancelado",object,PROCEDUREEVENTS_MV,14
+214,comments_editedby,Titulo del cuidador que edito la orden,object,PROCEDUREEVENTS_MV,14
+215,comments_canceledby,Titulo del cuidador que cancelo la orden,object,PROCEDUREEVENTS_MV,14
+216,comments_date,Hora en que el cuidador cancelo o edito la orden,object,PROCEDUREEVENTS_MV,14
+217,row_id,Identificador unico de linea,int64,CPTEVENTS,15
+218,subject_id,Identificador para los pacientes,int64,CPTEVENTS,15
+219,hadm_id,Identificador para las admiciones,int64,CPTEVENTS,15
+220,costcenter,Centro que registra el codigo[ejemplo: UCI o unidad respiratoria],object,CPTEVENTS,15
+221,chartdate,Fecha en que ocurrio el evento,object,CPTEVENTS,15
+222,cpt_cd,algun codigo,int64,CPTEVENTS,15
+223,cpt_number,Codigo de terminologia procesal actual,int64,CPTEVENTS,15
+224,cpt_suffix,"Elemento del texto del codigo CPT, indica la categoria del codigo",float64,CPTEVENTS,15
+225,ticket_id_seq,"Numero de secuencia del evento, derivado de la identificacion del boleto",float64,CPTEVENTS,15
+226,sectionheader,Seccion de alto nivel del codigo CPT,object,CPTEVENTS,15
+227,subsectionheader,Subseccion del codigo CPT,object,CPTEVENTS,15
+228,description,Descripcion de la terminologia Procesal actual,object,CPTEVENTS,15
+229,row_id,Identificador de fila único,INT,DIAGNOSES_ICD,16
+230,subject_id,ID del Paciente,INT,DIAGNOSES_ICD,16
+231,hadm_id,Id de Admisiones,INT,DIAGNOSES_ICD,16
+232,seq_num,Prioridad del código. La secuencia 1 es el código principal,INT,DIAGNOSES_ICD,16
+233,icd9_code,Clasificación Internacional de Enfermedades,VARCHAR(10),DIAGNOSES_ICD,16
+234,row_id,Identificador de la Fila,INT,DRGCODES,17
+235,subject_id,ID del Paciente,INT,DRGCODES,17
+236,hadm_id,Id de Admisiones,INT,DRGCODES,17
+237,drg_type,Tipo de grupo relacionado con el diagnóstico,VARCHAR(20),DRGCODES,17
+238,drg_code,Código de grupo relacionado con el diagnóstico,VARCHAR(20),DRGCODES,17
+239,description,Descripción del DRG,VARCHAR(300),DRGCODES,17
+240,drg_severity,Gravedad relativa,SMALLINT,DRGCODES,17
+241,drg_mortality,Mortalidad relativa,SMALLINT,DRGCODES,17
+242,row_id,Identificador de fila único,INT,DIAGNOSES_ICD,18
+243,subject_id,ID del Paciente,INT,DIAGNOSES_ICD,18
+244,hadm_id,Id de Admisiones,INT,DIAGNOSES_ICD,18
+245,itemid,Referencia a la tabla D_LABITEMS,INT,DIAGNOSES_ICD,18
+246,charttime,Momento en que ocurrió el evento,TIMESTAMP(0),DIAGNOSES_ICD,18
+247,value,Valor del evento en formato texto,VARCHAR(200),DIAGNOSES_ICD,18
+248,valuenum,Valor del evento como un número,DOUBLE PRECISION,DIAGNOSES_ICD,18
+249,valueuom,Unidad de medida,VARCHAR(20),DIAGNOSES_ICD,18
+250,flag,Estado del valor de la prueba de laboratorio (NULL = normal),VARCHAR(20),DIAGNOSES_ICD,18
+251,row_id,Identificador de fila único,INT,MICROBIOLOGYEVENTS,19
+252,subject_id,ID del Paciente,INT,MICROBIOLOGYEVENTS,19
+253,hadm_id,Id de Admisiones,INT,MICROBIOLOGYEVENTS,19
+254,chartdate,Fecha en que ocurrió el evento,TIMESTAMP(0),MICROBIOLOGYEVENTS,19
+255,charttime,Hora en que ocurrió el evento,TIMESTAMP(0),MICROBIOLOGYEVENTS,19
+256,spec_itemid,Identifica el espécimen,INT,MICROBIOLOGYEVENTS,19
+257,spec_type_desc,Descripción del espécimen,VARCHAR(100),MICROBIOLOGYEVENTS,19
+258,org_itemid,Identifica el organismo,INT,MICROBIOLOGYEVENTS,19
+259,org_name,Nombre del organismo,VARCHAR(100),MICROBIOLOGYEVENTS,19
+260,isolate_num,Número aislado asociado a la prueba,SMALLINT,MICROBIOLOGYEVENTS,19
+261,ab_itemid,Identifica el anticuerpo,INT,MICROBIOLOGYEVENTS,19
+262,ab_name,Nombre del anticuerpo utilizado,VARCHAR(30),MICROBIOLOGYEVENTS,19
+263,dilution_text,La cantidad de dilución probada y la comparación que se hizo,VARCHAR(10),MICROBIOLOGYEVENTS,19
+264,dilution_comparison,El componente de comparación de DILUTION_TEXT,VARCHAR(20),MICROBIOLOGYEVENTS,19
+265,dilution_value,El valor del componente DILUTION_TEXT,DOUBLE PRECISION,MICROBIOLOGYEVENTS,19
+266,interpretation,Interpretación de la prueba,VARCHAR(5),MICROBIOLOGYEVENTS,19
+267,row_id,Identificador de fila único,INT,PRESCRIPTIONS,20
+268,subject_id,ID del Paciente,INT,PRESCRIPTIONS,20
+269,hadm_id,ID del Admisiones,INT,PRESCRIPTIONS,20
+270,icustay_id,Referencia a ICUSTAYS,INT,PRESCRIPTIONS,20
+271,startdate,Fecha en que comenzó la prescripción,TIMESTAMP(0),PRESCRIPTIONS,20
+272,enddate,Fecha en que terminó la prescripción,TIMESTAMP(0),PRESCRIPTIONS,20
+273,drug_type,tipo de droga,VARCHAR(100),PRESCRIPTIONS,20
+274,drug,nombre de la droga,VARCHAR(100),PRESCRIPTIONS,20
+275,drug_name_poe,Nombre del medicamento en la interfaz de entrada de pedidos del proveedor,VARCHAR(100),PRESCRIPTIONS,20
+276,drug_name_generic,nombre genérico de la droga,VARCHAR(100),PRESCRIPTIONS,20
+277,formulary_drug_cd,Código de medicamento del formulario,VARCHAR(120),PRESCRIPTIONS,20
+278,gsn,Número de secuencia genérico,VARCHAR(200),PRESCRIPTIONS,20
+279,ndc,Código Nacional de Drogas,VARCHAR(120),PRESCRIPTIONS,20
+280,prod_strength,Fuerza de la droga (producto),VARCHAR(120),PRESCRIPTIONS,20
+281,dose_val_rx,Dosis del fármaco prescrito,VARCHAR(120),PRESCRIPTIONS,20
+282,dose_unit_rx,Unidad de medida asociada a la dosis,VARCHAR(120),PRESCRIPTIONS,20
+283,form_val_disp,Cantidad de la fórmula dispensada,VARCHAR(120),PRESCRIPTIONS,20
+284,form_unit_disp,Unidad de medida asociada a la formulación,VARCHAR(120),PRESCRIPTIONS,20
+285,route,Vía de administración,VARCHAR(120),PRESCRIPTIONS,20
+286,row_id,identificador de fila,int,PROCEDURES_ICD,21
+287,subject_id,id de paciente,int,PROCEDURES_ICD,21
+288,hadm_id,id de admision,int,PROCEDURES_ICD,21
+289,seq_num,numero de procedimiento ocurrido antes,int,PROCEDURES_ICD,21
+290,icd9_code,"clasificación para describir enfermedades, lesiones y afecciones médicas ",O,PROCEDURES_ICD,21
+291,row_id,identificador de fila,int,D_CPT,22
+292,category,categoria,int,D_CPT,22
+293,sectionrange,Rango de la seccion,O,D_CPT,22
+294,sectionheader,seccion cabecera,O,D_CPT,22
+295,subsectionrange,Rango de la subseccion,O,D_CPT,22
+296,subsectionheader,cabecera de la subseccion,O,D_CPT,22
+297,codesuffix,Elem. de Texto de terminologia procesal,O,D_CPT,22
+298,mincodeinsubsection,codigo minimo dentro de la subseccion,int,D_CPT,22
+299,maxcodeinsubsection,codigo maximo dentro de la subseccion,int,D_CPT,22
+300,row_id,identificador de fila,int,D_ICD_DIAGNOSES,23
+301,icd9_code,"clasificación para describir enfermedades, lesiones y afecciones médicas ",int,D_ICD_DIAGNOSES,23
+302,short_title,titulo corto de enfermedad o lesion etc,O,D_ICD_DIAGNOSES,23
+303,long_title,titulo largo de enfermedad o lesion.etc,O,D_ICD_DIAGNOSES,23
+304,row_id,identificador de fila,int,D_ICD_PROCEDURES,24
+305,icd9_code,"clasificación para describir enfermedades, lesiones y afecciones médicas ",int,D_ICD_PROCEDURES,24
+306,short_title,titulo corto de enfermedad o lesion etc,O,D_ICD_PROCEDURES,24
+307,long_title,titulo largo de enfermedad o lesion.etc,O,D_ICD_PROCEDURES,24
+308,row_id,identificador de fila,int,D_ITEMS,25
+309,itemid,Clasificación de item,int,D_ITEMS,25
+310,label,Nombre del item ,O,D_ITEMS,25
+311,abbreviation,Abreviacion,O,D_ITEMS,25
+312,dbsource,Fuente de datos,O,D_ITEMS,25
+313,linksto,tabla de donde proviene el item,O,D_ITEMS,25
+314,category,Categoria,O,D_ITEMS,25
+315,unitname,nombre unico del item,O,D_ITEMS,25
+316,param_type,tipo de item,O,D_ITEMS,25
+317,conceptid,Id para relacionar conceptos,int,D_ITEMS,25
+318,row_id,identificador de fila,int,D_LABITEMS,26
+319,itemid,Clasificación de item,int,D_LABITEMS,26
+320,label,Nombre del item ,O,D_LABITEMS,26
+321,fluid,Tipo de fluido,O,D_LABITEMS,26
+322,category,categoria,O,D_LABITEMS,26
+323,loinc_code,Identificador logico por nombre y codigo de item,O,D_LABITEMS,26
