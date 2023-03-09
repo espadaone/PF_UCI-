@@ -1,0 +1,93 @@
+Name,Descripcion,Dtype,Tabla,n tabla
+row_id,Identificador de linea,int64,INPUTEVENTS_MV,11
+subject_id,Identificador para los pacientes,int64,INPUTEVENTS_MV,11
+hadm_id,Identificador para las admiciones,int64,INPUTEVENTS_MV,11
+icustay_id,Identificador de estancia,int64,INPUTEVENTS_MV,11
+starttime,Tiempo de inicio del evento,object,INPUTEVENTS_MV,11
+endtime,Tiempo de fin del evento,object,INPUTEVENTS_MV,11
+itemid,Identificador de item,int64,INPUTEVENTS_MV,11
+amount,Cantidad del item suministrada al paciente,float64,INPUTEVENTS_MV,11
+amountuom,Unidad de medida de la cantidad,object,INPUTEVENTS_MV,11
+rate,Velocidad a la que se suministra el item al paciente,float64,INPUTEVENTS_MV,11
+rateuom,Unidad de medida de la velocidad,object,INPUTEVENTS_MV,11
+storetime,Tiempo en que se registro el evento en el sistema,object,INPUTEVENTS_MV,11
+cgid,Identificador del cuidador,int64,INPUTEVENTS_MV,11
+orderid,Identificador que vincula elementos que se agrupan en una solucion,int64,INPUTEVENTS_MV,11
+linkorderid,Identificador que vincula pedidos a traves de multiples administraciones,int64,INPUTEVENTS_MV,11
+ordercategoryname,Grupo al que corresponde el item,object,INPUTEVENTS_MV,11
+secondaryordercategoryname,Grupo secondario para aquellos items con mas de una agrupacion,object,INPUTEVENTS_MV,11
+ordercomponenttypedescription,La funcion del item administrado,object,INPUTEVENTS_MV,11
+ordercategorydescription,Tipo de item administrado,object,INPUTEVENTS_MV,11
+patientweight,Peso del paciente para el calculo de la medicacion,float64,INPUTEVENTS_MV,11
+totalamount,Cantidad total en la solucion para el articulo dado,float64,INPUTEVENTS_MV,11
+totalamountuom,Unidad de medida para la cantidad total del item,object,INPUTEVENTS_MV,11
+isopenbag,Indica si la bolsa que contiene la solucion esta abierta,int64,INPUTEVENTS_MV,11
+continueinnextdept,Indica si el item continuara o si se transfiere,int64,INPUTEVENTS_MV,11
+cancelreason,Razon de cancelacion,int64,INPUTEVENTS_MV,11
+statusdescription,"Estado actual del pedido: Detenido, Reescrito, en ejecucion, cancelado",object,INPUTEVENTS_MV,11
+comments_editedby,Titulo del cuidador que edito la orden,object,INPUTEVENTS_MV,11
+comments_canceledby,Titulo del cuidador que cancelo la orden,object,INPUTEVENTS_MV,11
+comments_date,Hora en que el cuidador cancelo o edito la orden,object,INPUTEVENTS_MV,11
+originalamount,Cantidad del item que se registro originalmente,float64,INPUTEVENTS_MV,11
+originalrate,Velocidad elegida originalmente para el item,float64,INPUTEVENTS_MV,11
+row_id,Identificador unico de linea,NO DATA,NOTEEVENTS,12
+subject_id,Identificador para los pacientes,NO DATA,NOTEEVENTS,12
+hadm_id,Identificador para las admiciones,NO DATA,NOTEEVENTS,12
+chartdate,Fecha en que se hizo la nota,NO DATA,NOTEEVENTS,12
+charttime,Fecha y hora en que se trazo la nota,NO DATA,NOTEEVENTS,12
+storetime,Hora en que se registro el evento en el sistema,NO DATA,NOTEEVENTS,12
+category,Categoria de la nota,NO DATA,NOTEEVENTS,12
+description,Categorizacion mas detallada de la nota,NO DATA,NOTEEVENTS,12
+cgid,Identificador del cuidador,NO DATA,NOTEEVENTS,12
+iserror,Marca para resaltar un error con la nota,NO DATA,NOTEEVENTS,12
+text,Contenido de la nota,NO DATA,NOTEEVENTS,12
+row_id,Identificador unico de linea,int64,OUTPUTEVENTS,13
+subject_id,Identificador para los pacientes,int64,OUTPUTEVENTS,13
+hadm_id,Identificador para las admiciones,int64,OUTPUTEVENTS,13
+icustay_id,Identificador de estancia,float64,OUTPUTEVENTS,13
+charttime,Hora de un evento de salida,object,OUTPUTEVENTS,13
+itemid,Identificador de item,int64,OUTPUTEVENTS,13
+value,La cantidad de sustancia en CHARTTIME,float64,OUTPUTEVENTS,13
+valueuom,Unidad de medida de la sustancia,object,OUTPUTEVENTS,13
+storetime,Hora en que se registro el evento en sistema,object,OUTPUTEVENTS,13
+cgid,Identificador del cuidador,int64,OUTPUTEVENTS,13
+stopped,Indica si el pedido se detuvo en CHARTTIME dado,float64,OUTPUTEVENTS,13
+newbottle,Indica que se colgo una nueva bolsa de solucion en CHARTTIME determinado,float64,OUTPUTEVENTS,13
+iserror,"En Metavision, indicador de checkbox para un error de observacion",float64,OUTPUTEVENTS,13
+row_id,Identificador de linea,int64,PROCEDUREEVENTS_MV,14
+subject_id,Identificador para los pacientes,int64,PROCEDUREEVENTS_MV,14
+hadm_id,Identificador para las admiciones,int64,PROCEDUREEVENTS_MV,14
+icustay_id,Identificador de estancia,int64,PROCEDUREEVENTS_MV,14
+starttime,Hora de inicio del evento,object,PROCEDUREEVENTS_MV,14
+endtime,Hora de termino del evento,object,PROCEDUREEVENTS_MV,14
+itemid,Identificador del item,int64,PROCEDUREEVENTS_MV,14
+value,Valor del evento,int64,PROCEDUREEVENTS_MV,14
+valueuom,Unidad de medida,object,PROCEDUREEVENTS_MV,14
+location,Localizacion del malestar,object,PROCEDUREEVENTS_MV,14
+locationcategory,Tiempo en que se regisstro el evento en sistema,object,PROCEDUREEVENTS_MV,14
+storetime,Identificador del cuidador,object,PROCEDUREEVENTS_MV,14
+cgid,Identificador que vincula elementos que se agrupan en una solucion,int64,PROCEDUREEVENTS_MV,14
+orderid,Identificador que vincula pedidos a traves de multiples administraciones,int64,PROCEDUREEVENTS_MV,14
+linkorderid,Grupo al que corresponde el item,int64,PROCEDUREEVENTS_MV,14
+ordercategoryname,Grupo secondario para aquellos items con mas de una agrupacion,object,PROCEDUREEVENTS_MV,14
+secondaryordercategoryname,La funcion del item administrado,float64,PROCEDUREEVENTS_MV,14
+ordercategorydescription,Tipo de item administradoSubcategoria de la localizacion del malestar,object,PROCEDUREEVENTS_MV,14
+isopenbag,Indica si la bolsa que contiene la solucion esta abierta,int64,PROCEDUREEVENTS_MV,14
+continueinnextdept,Indica si el item continuara o si se transfiere,int64,PROCEDUREEVENTS_MV,14
+cancelreason,Razon de cancelacion,int64,PROCEDUREEVENTS_MV,14
+statusdescription,"Estado actual del pedido: Detenido, Reescrito, en ejecucion, cancelado",object,PROCEDUREEVENTS_MV,14
+comments_editedby,Titulo del cuidador que edito la orden,object,PROCEDUREEVENTS_MV,14
+comments_canceledby,Titulo del cuidador que cancelo la orden,object,PROCEDUREEVENTS_MV,14
+comments_date,Hora en que el cuidador cancelo o edito la orden,object,PROCEDUREEVENTS_MV,14
+row_id,Identificador unico de linea,int64,CPTEVENTS,15
+subject_id,Identificador para los pacientes,int64,CPTEVENTS,15
+hadm_id,Identificador para las admiciones,int64,CPTEVENTS,15
+costcenter,Centro que registra el codigo[ejemplo: UCI o unidad respiratoria],object,CPTEVENTS,15
+chartdate,Fecha en que ocurrio el evento,object,CPTEVENTS,15
+cpt_cd,algun codigo,int64,CPTEVENTS,15
+cpt_number,Codigo de terminologia procesal actual,int64,CPTEVENTS,15
+cpt_suffix,"Elemento del texto del codigo CPT, indica la categoria del codigo",float64,CPTEVENTS,15
+ticket_id_seq,"Numero de secuencia del evento, derivado de la identificacion del boleto",float64,CPTEVENTS,15
+sectionheader,Seccion de alto nivel del codigo CPT,object,CPTEVENTS,15
+subsectionheader,Subseccion del codigo CPT,object,CPTEVENTS,15
+description,Descripcion de la terminologia Procesal actual,object,CPTEVENTS,15
