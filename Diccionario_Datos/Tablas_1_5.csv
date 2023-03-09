@@ -1,0 +1,70 @@
+,Name,Descripcion,Dtype,tabla,n tabla
+0,row_id,(Obsoleto) Identificador de fila único,int,admissions,1
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,admissions,1
+2,hadm_id,Identificador único para cada estancia hospitalaria,int,admissions,1
+3,admittime,Hora de ingreso,Date,admissions,1
+4,dischtime,Hora de alta,Date,admissions,1
+5,deathtime,Hora de la muerte,Date,admissions,1
+6,admission_type,Tipo de admisión [ejemplo: emergencia o electiva],O,admissions,1
+7,admission_location,Lugar de admisión,O,admissions,1
+8,discharge_location,Lugar de alta,O,admissions,1
+9,insurance,Tipo de seguro,O,admissions,1
+10,language,Idioma,O,admissions,1
+11,religion,Religión,O,admissions,1
+12,marital_status,Estado civil,O,admissions,1
+13,ethnicity,Etnicidad,O,admissions,1
+14,edregtime,Tiempo que el paciente estuvo registrado en el servicio de urgencias,Date,admissions,1
+15,edouttime,Tiempo en que el paciente fue dado de alta del servicio de urgencias,Date,admissions,1
+16,diagnosis,Diagnostico(Enfermedad o lesión),O,admissions,1
+17,hospital_expire_flag,-,int,admissions,1
+18,has_chartevents_data,Tiene al menos una observación en la tabla CHARTEVENTS,int,admissions,1
+0,row_id,(Obsoleto) Identificador de fila único,int,callout,2
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,callout,2
+2,hadm_id,Identificador único para cada estancia hospitalaria,int,callout,2
+3,submit_wardid,Identifica el distrito donde se envió la solicitud de llamada,int,callout,2
+4,submit_careunit,"Sala donde se envió la llamada, si es una unidad de atención, se incluye el tipo de UCI aquí",O,callout,2
+5,curr_wardid,Sala donde reside actualmente el paciente,int,callout,2
+6,curr_careunit,"Si actualmente se encuentra en una unidad de cuidados, el tipo de UCI se indica aquí",O,callout,2
+7,callout_wardid,"Dónde se va a dar de alta al paciente, 0 = domicilio, 1 = primero disponible pabellón",int,callout,2
+8,callout_service,Identifica el servicio al que se llama al paciente,O,callout,2
+9,request_tele,Indica si se requieren precauciones especiales [telemetría],int,callout,2
+10,request_resp,Indica si se requieren precauciones especiales [respiratoria],int,callout,2
+11,request_cdiff,Indica si se requieren precauciones especiales [infección C dif],int,callout,2
+12,request_mrsa,Indica si se requieren precauciones especiales [infección por SARM],int,callout,2
+13,request_vre,Indica si se requieren precauciones especiales [infección por VRE],int,callout,2
+14,callout_status,Estado actual de la solicitud de llamada,O,callout,2
+15,callout_outcome,Resultado [cancelación o alta],O,callout,2
+16,discharge_wardid,La sala a la que fue dado de alta el paciente,float,callout,2
+17,acknowledge_status,Estado de la respuesta a la solicitud de llamada,O,callout,2
+18,createtime,Hora y fecha en que se inició la llamada,Date,callout,2
+19,updatetime,Última vez que se actualizó el evento de llamada,Date,callout,2
+20,acknowledgetime,Hora a la que se acusó recibo de la solicitud de llamada,Date,callout,2
+21,outcometime,Hora en que se produjo (cancelación o baja),Date,callout,2
+22,firstreservationtime,Primera vez que se reservó una sala para la solicitud de llamada,Date,callout,2
+23,currentreservationtime,Última hora en que se reservó un barrio para la solicitud de llamada,Date,callout,2
+0,row_id,(Obsoleto) Identificador de fila único,int,icustays,3
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,icustays,3
+2,hadm_id,Identificador único para cada estancia hospitalaria,int,icustays,3
+3,icustay_id,Identificador único para la estancia en la UCI,int,icustays,3
+4,dbsource,Base de datos de origen del artículo,O,icustays,3
+5,first_careunit,Primera unidad de cuidados asociada a la estancia en UCI,O,icustays,3
+6,last_careunit,Última unidad asociada a la estancia en UCI,O,icustays,3
+7,first_wardid,Identificador de la ubicación de la primera sala del paciente,int,icustays,3
+8,last_wardid,Identificador de la ubicación de la última sala del paciente,int,icustays,3
+9,intime,Tiempo de ingreso a la UCI,Date,icustays,3
+10,outtime,Hora de alta de la UCI,Date,icustays,3
+11,los,Duración de la estancia en la UCI en minutos,float,icustays,3
+0,row_id,(Obsoleto) Identificador de fila único,int,patients,4
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,patients,4
+2,gender,"Genero [masculino, femenino]",O,patients,4
+3,dob,Fecha de nacimiento,Date,patients,4
+4,dod,Fecha de muerte,Date,patients,4
+5,dod_hosp,Fecha de la muerte registrada en los registros del hospital,Date,patients,4
+6,dod_ssn,Fecha de la muerte registrada en los registros de seguridad social,Date,patients,4
+7,expire_flag,Bandera que indica que la patente ha muerto,int,patients,4
+0,row_id,(Obsoleto) Identificador de fila único,int,services,5
+1,subject_id,PACIENTES DE REFERENCIAS (SUBJECT_ID),int,services,5
+2,hadm_id,Identificador único para cada estancia hospitalaria,int,services,5
+3,transfertime,Hora en que se produjo la transferencia,Date,services,5
+4,prev_service,Tipo de servicio anterior,O,services,5
+5,curr_service,Tipo de servicio actual,O,services,5
