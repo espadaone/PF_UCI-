@@ -22,8 +22,8 @@ admissions = pd.DataFrame(cursor, columns=("hadm_id", "subject_id", "admittime",
 cursor.execute("select subject_id, gender, insurance, dob from patients")
 patients = pd.DataFrame(cursor, columns=("subject_id", "gender", "insurance", "dob"))
 
-cursor.execute("select prescriptions_id, drug from prescriptions")
-prescriptions = pd.DataFrame(cursor, columns=("prescriptions_id", "drug"))
+#cursor.execute("select prescriptions_id, drug from prescriptions")
+#prescriptions = pd.DataFrame(cursor, columns=("prescriptions_id", "drug"))
 
 
 st.title('Estadisticas generales')     # Titulo de la app
@@ -52,15 +52,15 @@ ax.barh(x, y, color=["yellowgreen","salmon","tan","coral","lavender"])
 st.pyplot(fig)
 
 
-st.subheader('Drogas mas recetadas')
-pre = prescriptions["drug"].value_counts().head()
-prescriptions_df = pd.DataFrame(data=pre)
-prescriptions_df
-fig, ax = plt.subplots()
-x = prescriptions_df.index
-y = prescriptions_df["drug"]
-ax.barh(x, y, color=["yellowgreen","orchid","pink","coral","aqua"])
-st.pyplot(fig)
+#st.subheader('Drogas mas recetadas')
+#pre = prescriptions["drug"].value_counts().head()
+#prescriptions_df = pd.DataFrame(data=pre)
+#prescriptions_df
+#fig, ax = plt.subplots()
+#x = prescriptions_df.index
+#y = prescriptions_df["drug"]
+#ax.barh(x, y, color=["yellowgreen","orchid","pink","coral","aqua"])
+#st.pyplot(fig)
 
 
 st.subheader('Duracion media de estancia por diagnostico')
