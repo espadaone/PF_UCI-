@@ -223,6 +223,6 @@ tasa_supervivencia = pd.DataFrame(data=data, columns=["estado", "cantidad"])
 suma = tasa_supervivencia["cantidad"].sum()
 sobrevivientes = tasa_supervivencia.loc[0,"cantidad"]
 tasa_supervivencia = sobrevivientes/suma
-#connection.close()
+connection.close()
 #tasa_supervivencia
 st.metric(label="Tasa de supervivencia ", value=round(tasa_supervivencia*100), delta="%")
