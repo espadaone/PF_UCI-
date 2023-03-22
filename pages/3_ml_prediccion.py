@@ -72,7 +72,7 @@ st.metric(label="El score del modelo es:", value=round(scored*100), delta="%")
 
 
 #print("El scrore del modelo es:",arbol.score(X_train, y_train))
-
+connection.close()
 fig, ax = plt.subplots(figsize = (5,6))
 plt.boxplot(Y_pred)
 plt.title('Prediccion de estadia de pacientes')

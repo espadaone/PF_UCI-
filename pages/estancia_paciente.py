@@ -50,3 +50,4 @@ st.subheader('Ultima droga recetada:')
 
 
 st.subheader('Procedimiento realizado al paciente:')
+connection.close()
