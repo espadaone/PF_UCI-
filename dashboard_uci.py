@@ -4,82 +4,203 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import pymysql
+from datetime import datetime
+import streamlit.components.v1 as components
 
+st.set_page_config(page_title='UCI: Dashboard general', page_icon=':hospital:')
 
 # Conexion con ddbb
 connection = pymysql.connect(
-    host='servaz.mysql.database.azure.com',
-    user='Azadmin',
-    password='AZcosmospf08',
-    db='pf_uci'
+    host = 'localhost',
+    user = 'root',
+    password = 'administrador',
+    db = 'pf_uci'
 )
 cursor = connection.cursor()
 
 # Traemos datos desde la base de datos y guardamos las tablas a usar en datasets.
-cursor.execute("select hadm_id, subject_id, admittime, admission_type, diagnosis from admissions")
-admissions = pd.DataFrame(cursor, columns=("hadm_id", "subject_id", "admittime", "admission_type", "diagnosis"))
+cursor.execute("select hadm_id, subject_id, admittime, dischtime, deathtime, admission_type, diagnosis from admissions")
+admissions = pd.DataFrame(cursor, columns=("hadm_id", "subject_id", "admittime", "dischtime", "deathtime", "admission_type", "diagnosis"))
 
 cursor.execute("select subject_id, gender, insurance, dob from patients")
 patients = pd.DataFrame(cursor, columns=("subject_id", "gender", "insurance", "dob"))
 
-#cursor.execute("select prescriptions_id, drug from prescriptions")
-#prescriptions = pd.DataFrame(cursor, columns=("prescriptions_id", "drug"))
+cursor.execute("select prescriptions_id, drug from prescriptions")
+prescriptions = pd.DataFrame(cursor, columns=("prescriptions_id", "drug"))
+
+#Datos para tasa de mortalidad por rango etario
+cursor.execute("SELECT hospital_expire_flag FROM admissions")
+mortalidad_rango_etario = pd.DataFrame(cursor, columns=['hospital_expire_flag'])
+
+# Datos para calcular duración de estancia por diagnostico
+cursor.execute("SELECT diagnosis, avg(timestampdiff(day, admittime, dischtime)) FROM admissions group by 1;")
+estancia_byDiagnosis = cursor.fetchall()
+
+#Datos para promedio de estadia
+cursor.execute(
+    "SELECT subject_id, timestampdiff(day, admittime, dischtime) FROM admissions;"
+)
+data_estadia = pd.DataFrame(cursor, columns=('subject_id','estadia'))
+promedio_estadia = data_estadia['estadia'].values.mean()
+promedio_estadia = promedio_estadia.round(0)
+
+cursor.execute("SELECT count(*), month(admittime) from admissions group by 2 order by 2 asc")
+data_adm_mes = cursor.fetchall()
+
+connection.close()
 
 
-st.title('Estadisticas generales')     # Titulo de la app
+st.title('Estadisticas generales')     # Titulo de la página
+st.image('images/estadistica.jpg', width=700)
 
-st.subheader('Pacientes por genero')
+
+# Separador
+st.markdown('--------------------------------------------------')
+
+st.subheader('Clasificación de pacientes por género')
+col1, col2 = st.columns(2)
 genero = patients['gender'].value_counts()
 genero_df = pd.DataFrame(data=genero)
 genero_df['porcentaje'] = (genero_df['gender']/genero_df['gender'].sum()) * 100
 fig, ax = plt.subplots()
+fig.set(figheight=2, figwidth=2)
 x = genero_df['porcentaje']
 colors = ['pink', 'aqua']
 labels = genero.index
-text_prop = {'family':'sans-serif', 'fontsize':'medium', 'fontstyle':'italic', 'fontweight':'heavy'}
-ax.pie(x, colors=colors, labels=labels, radius=0.6, labeldistance=0.3, autopct="%1.0f%%", center=(4, 4), wedgeprops={"linewidth": 2, "edgecolor": "white"}, textprops=text_prop)
-st.pyplot(fig)
+text_prop = {'family':'sans-serif', 'fontsize':10, 'fontstyle':'italic', 'fontweight':'heavy'}
+ax.pie(x, colors=colors, labels=labels, radius=1, labeldistance=0.3, autopct="%1.0f%%", center=(4, 4), wedgeprops={"linewidth": 1, "edgecolor": "white"}, textprops=text_prop)
+
+with col1:
+    st.pyplot(fig)
+with col2:
+    print('')
 
 
-st.subheader('Enfermedades mas comunes')
-top_enfermedades = admissions["diagnosis"].value_counts().head()
+
+# Separador
+st.markdown('--------------------------------------------------')
+
+st.subheader('Top 5: Diagnósticos más comunes')
+top_enfermedades = admissions["diagnosis"].value_counts().head().sort_values('index', ascending=True)
 enfermedades_df = pd.DataFrame(data=top_enfermedades)
-enfermedades_df
+#--Gráfico
 fig, ax = plt.subplots()
+fig.set(figheight=2, figwidth=5)
 x = enfermedades_df.index
 y = enfermedades_df["diagnosis"]
 ax.barh(x, y, color=["yellowgreen","salmon","tan","coral","lavender"])
+st.pyplot(fig)        
+
+
+# Separador
+st.markdown('--------------------------------------------------')
+
+st.subheader('Top 5: Drogas más recetadas')
+pre = prescriptions["drug"].value_counts().head().sort_values('index', ascending=True)
+prescriptions_df = pd.DataFrame(data=pre)
+#--Gráfico
+fig, ax = plt.subplots()
+fig.set(figheight=2, figwidth=5)
+x = prescriptions_df.index
+y = prescriptions_df["drug"]
+ax.barh(x, y, color=["yellowgreen","orchid","pink","coral","aqua"])
 st.pyplot(fig)
 
 
-#st.subheader('Drogas mas recetadas')
-#pre = prescriptions["drug"].value_counts().head()
-#prescriptions_df = pd.DataFrame(data=pre)
-#prescriptions_df
-#fig, ax = plt.subplots()
-#x = prescriptions_df.index
-#y = prescriptions_df["drug"]
-#ax.barh(x, y, color=["yellowgreen","orchid","pink","coral","aqua"])
-#st.pyplot(fig)
+# Separador
+st.markdown('--------------------------------------------------')
 
 
-st.subheader('Duracion media de estancia por diagnostico')
+st.subheader('Admisiones por seguro médico')
+admissions_insurance = pd.merge(left=admissions, right=patients, left_on='subject_id', right_on='subject_id', how='left')
+admissions_insurance = admissions_insurance.groupby('insurance').count()
+admissions_insurance['insurance'] =  admissions_insurance.index
+admissions_insurance.reset_index(drop = True, inplace = True)
+admissions_insurance.rename(columns={'hadm_id': 'count'}, inplace=True)
+admissions_insurance = admissions_insurance[['insurance', 'count']]
+admissions_insurance = admissions_insurance.sort_values('count', ascending=False)
+fig, ax = plt.subplots()
+fig.set(figheight=2, figwidth=5)
+x = admissions_insurance['insurance']
+y = admissions_insurance['count']
+ax.bar(x, y)
+st.pyplot(fig)
 
 
-st.subheader('Admisiones por insurance')
+# Separador
+st.markdown('--------------------------------------------------')
 
 
-st.subheader('Pacientes vs cuidadores')
+# Fallecidos por mes
+st.subheader('Pacientes fallecidos por mes')
+mes_fallecimiento = st.slider('Mes de fallecimiento', 1, 12, value=(1, 12))  # min: 1 mes, max: 12 meses
+admissions.dropna(inplace=True)
+admissions["month"] = admissions["deathtime"].apply(lambda x: datetime.date(x).month)
+admissions_byMonth = admissions.groupby('month', as_index=False).count().sort_values(by='month')
+admissions_byMonth = admissions_byMonth[['month', 'hadm_id']]
+admissions_byMonth.rename(columns={'hadm_id': 'count'}, inplace=True)
+filtro_fallecimiento = admissions_byMonth[(admissions_byMonth['month'] >= mes_fallecimiento[0]) & (admissions_byMonth['month'] <= mes_fallecimiento[1])] 
+#--Gráfico
+fig, ax = plt.subplots()
+fig.set(figheight=3, figwidth=6)
+x = filtro_fallecimiento['month']
+y = filtro_fallecimiento['count']
+ax.grid()
+ax.set(xlabel="Mes", ylabel="N° de fallecidos")
+plt.plot(x, y, marker="o")
+st.pyplot(fig)
 
 
-st.subheader('Tabla de rango etario pacientes')
+# Separador
+st.markdown('--------------------------------------------------')
 
-#cursor = connection.cursor()
-cursor.execute("SELECT subject_id, admittime, dischtime, deathtime FROM admissions")
-admissions = pd.DataFrame(cursor, columns=('subject_id','admittime','dischtime','deathtime'))
-cursor.execute("SELECT subject_id, dob, gender FROM patients")
-patients = pd.DataFrame(cursor, columns=('subject_id','dob','gender'))
-#connection.close()
+
+st.subheader('Admisiones por mes')
+mes_admision = st.slider('Mes de admisión', 1, 12, value=(1, 12))  # min: 1 mes, max: 12 meses
+adm_mes = pd.DataFrame(data=data_adm_mes, columns=["cantidad", "mes"])
+filtro_admision = adm_mes[(adm_mes['mes'] >= mes_admision[0]) & (adm_mes['mes'] <= mes_admision[1])] 
+#admisiones por mes
+fig, ax = plt.subplots()
+fig.set(figheight=3, figwidth=6)
+x = filtro_admision["mes"]
+y = filtro_admision["cantidad"]
+ax.grid()
+ax.set(xlabel="Meses", ylabel="N° de admisiones")
+plt.plot(x, y, marker="o")
+st.pyplot(fig)
+
+
+
+# Separador
+st.markdown('--------------------------------------------------')
+
+
+st.subheader('Duración media de estancia por diagnóstico')
+admissions_diagnosis = admissions[['diagnosis', 'admittime', 'dischtime']]
+admissions_diagnosis['admittime'] = pd.to_datetime(admissions_diagnosis['admittime']).dt.date
+admissions_diagnosis['dischtime'] = pd.to_datetime(admissions_diagnosis['dischtime']).dt.date
+admissions_diagnosis['lenght_stay'] = admissions_diagnosis['dischtime'] - admissions_diagnosis['admittime']
+lenght_prom_diagnoses = admissions_diagnosis.groupby('diagnosis', as_index=False).mean()
+lenght_prom_diagnoses = lenght_prom_diagnoses[['diagnosis', 'lenght_stay']]
+lenght_prom_diagnoses = lenght_prom_diagnoses.sort_values('lenght_stay', ascending=True).tail()
+lenght_prom_diagnoses['lenght_stay'] = lenght_prom_diagnoses['lenght_stay'].dt.days
+#--Gráfico
+fig, ax = plt.subplots()
+fig.set(figheight=2, figwidth=5)
+x = lenght_prom_diagnoses['diagnosis']
+y = lenght_prom_diagnoses['lenght_stay']
+ax.barh(x, y, color=["yellowgreen","orchid","pink","coral","aqua"])
+ax.set(xlabel="Días promedio de estancia")
+st.pyplot(fig)
+
+
+# Separador
+st.markdown('--------------------------------------------------')
+
+
+st.subheader('Duración media de la estancia en el hospital :ambulance:')
+
+# Calculo de rango etario
 edad = admissions[['subject_id','admittime']]
 edad['añoIngreso'] = edad['admittime'].dt.year
 edad = edad.merge(patients[['subject_id','dob']],on='subject_id')
@@ -88,141 +209,51 @@ edad['edad'] = edad['añoIngreso'] - edad['dob']
 edad = edad[['subject_id','edad']]
 edad['edad'][edad['edad'] == 300] = 90
 edad['rango etario'] = ''
-edad['rango etario'][edad['edad']>0] = 'Hasta 30 años'
-edad['rango etario'][edad['edad']>29] = 'De 30 a 49 años'
-edad['rango etario'][edad['edad']>49] = 'De 50 a 64 años'
-edad['rango etario'][edad['edad']>64] = 'De 65 a 79 años'
-edad['rango etario'][edad['edad']>79] = 'Mas de 80 años'
+edad['rango etario'][edad['edad']>0] = '<= 30 años'
+edad['rango etario'][edad['edad']>29] = '30 a 49 años'
+edad['rango etario'][edad['edad']>49] = '50 a 64 años'
+edad['rango etario'][edad['edad']>64] = '65 a 79 años'
+edad['rango etario'][edad['edad']>79] = '>= 80 años'
 
-#cursor = connection.cursor()
-
-# Tasa de readmision
-cursor.execute('SELECT subject_id, admittime FROM admissions')
-tabla_readmision = pd.DataFrame(cursor, columns=('subject_id','admittime'))
-#connection.close()
-
-# admisiones totales
-admisiones = len(tabla_readmision)
-# readmisiones
-readmisiones = admisiones - (len(tabla_readmision['subject_id'].unique()))
-# calculamos tasa de readmision anual
-tasa_readmision_anual = readmisiones/admisiones
 # Agregamos rango etario a la tabla
-tabla_readmision['rango etario'] = edad['rango etario']
-tabla_readmision['edad'] = edad['edad']
-# contamos la cantidad de ingresos por rango etario, estarán ordenados de menor a mayor
-ingresos_rango_etario = []
-rangos = ['Hasta 30 años','De 30 a 49 años','De 50 a 64 años','De 65 a 79 años','Mas de 80 años']
+data_estadia['rango etario'] = edad['rango etario']
+data_estadia['edad'] = edad['edad']
+# calculamos promedio de la estadia por rango etario, estarán ordenados por rango etario de menor a mayor
+estadia_rango_etario = []
+rangos = ['<= 30 años','30 a 49 años','50 a 64 años','65 a 79 años','>= 80 años']
 for indice_rango_etario in range(5):
-    cant_ingresos = 0
+    total_estadia = []
     validador_rango = rangos[indice_rango_etario]
-    for validador in tabla_readmision['rango etario']:
-        if validador == validador_rango:
-            cant_ingresos += 1
-    ingresos_rango_etario.append(cant_ingresos)
-# Separamos los datos de readmision
-readmitidos = pd.DataFrame(columns=('subject_id','rango etario'))
-for indice in range(128):
-    if tabla_readmision['subject_id'].duplicated().iloc[indice] == True:
-        readmitidos = readmitidos.append(tabla_readmision.iloc[indice])
-# contamos la cantidad de reingresos por rango etario, estarán ordenados de menor a mayor
-reingresos_rango_etario = []
-for indice_rango_etario in range(5):
-    cant_ingresos = 0
-    validador_rango = rangos[indice_rango_etario]
-    for validador in readmitidos['rango etario']:
-        if validador == validador_rango:
-            cant_ingresos += 1
-    reingresos_rango_etario.append(cant_ingresos)
-# calculamos la tasa de readmision para cada rango etario, estarán ordenados de menor a mayor
-tasa_readmision_rango_etario = []
-for indice in range(5):
-    tasa_readmision_rango_etario.append(reingresos_rango_etario[indice] / ingresos_rango_etario[indice])
-# graficamos
-fig, ax = plt.subplots(figsize = (6,4))
-rangos
-plt.bar(['Hasta 30','De 30 a 49','De 50 a 64','De 65 a 79','Más de 80'],tasa_readmision_rango_etario)
-plt.xlabel('Rango etario')
-plt.yticks(np.linspace(0,max(tasa_readmision_rango_etario),10))
-plt.ylabel('Tasa de readmision')
-st.pyplot(fig)
-#plt.show()
-# Tasa de readmision anual
-st.metric(label="Tasa de readmision anual", value=round(tasa_readmision_anual*100), delta="%")
-#print("Tasa de readmision anual",)
-
-st.subheader('Tabla de readmision mensual de pacientes')
-# extraemos los meses
-tabla_readmision['admitmonth'] = tabla_readmision['admittime'].dt.month
-# admisiones totales
-admisiones = len(tabla_readmision)
-# readmisiones
-readmisiones = admisiones - (len(tabla_readmision['subject_id'].unique()))
-# calculamos tasa de readmision anual
-tasa_readmision_anual = readmisiones/admisiones
-# contamos la cantidad de ingresos por cada mes, estarán ordenados de enero a diciembre
-vector_ingreso_mes = []
-mes = 1
-while mes < 13:
-    contador = 0
-    for validador in tabla_readmision['admitmonth']:
-        if validador == mes:
-            contador += 1
-    vector_ingreso_mes.append(contador)
-    mes += 1
-# separamos los registros de readmisiones
-readmitidos = pd.DataFrame(columns=('subject_id','admittime','admitmonth'))
-for indice in range(128):
-    if tabla_readmision['subject_id'].duplicated().iloc[indice] == True:
-        readmitidos = readmitidos.append(tabla_readmision.iloc[indice])
-# contamos la cantidad de reingresos por cada mes, estarán ordenados de enero a diciembre
-vector_reingreso_mes = []
-mes = 1
-while mes < 13:
-    contador = 0
-    for validador in readmitidos['admitmonth']:
-        if validador == mes:
-            contador += 1
-    vector_reingreso_mes.append(contador)
-    mes += 1
-# contamos la tasa de readmision para cada mes, estarán ordenados de enero a diciembre
-tasa_readmision_mensual = []
-for indice in range(12):
-    tasa_readmision_mensual.append(vector_reingreso_mes[indice] / vector_ingreso_mes[indice])
+    for indice in data_estadia.index:
+        if data_estadia['rango etario'][indice] == validador_rango:
+            total_estadia.append(data_estadia['estadia'][indice])
+    total_estadia = pd.DataFrame(total_estadia)
+    estadia_rango_etario.append(total_estadia[0].mean())
+# pasamos los datos a un df
+df_estadia_rango = pd.DataFrame(estadia_rango_etario)
+df_estadia_rango = df_estadia_rango.rename(columns={0:'Estadia'})
+df_estadia_rango['Rango etario'] = ['<= 30','30 a 49','50 a 64','65 a 79','>= 80']
+# los ordenamos para el grafico de pareto
+df_estadia_rango = df_estadia_rango.sort_values('Estadia',ascending=False)
+# calculamos freq(%) y cum(%) para graficar
+df_estadia_rango['Freq(%)'] = df_estadia_rango['Estadia']/df_estadia_rango['Estadia'].sum()*100
+df_estadia_rango['cum(%)'] = df_estadia_rango['Estadia'].cumsum()/df_estadia_rango['Estadia'].sum()*100
+# Reseteamos indice para facilitar titulos de barras
+df_estadia_rango.reset_index(inplace=True)
+df_estadia_rango.drop(columns=("index"), inplace=True)
 # Graficamos
-
-fig, ax = plt.subplots(figsize = (6,4))
-meses = [1,2,3,4,5,6,7,8,9,10,11,12]
-plt.plot(meses,tasa_readmision_mensual, label = 'Tasa de readmision mensual')
-plt.xticks(np.linspace(1,12,12))
-plt.xlabel('Meses')
-plt.yticks(np.linspace(min(tasa_readmision_mensual),max(tasa_readmision_mensual),10))
-plt.ylabel('Tasa de readmision')
-plt.grid()
-plt.legend()
-#plt.show()
+fig, ax = plt.subplots(figsize=(8,6))
+ax.bar(df_estadia_rango['Rango etario'], df_estadia_rango['Freq(%)'])
+#ax2 = ax.twinx()
+#ax2.plot(df_estadia_rango['Rango etario'], df_estadia_rango['cum(%)'], color="g", marker="o", ms=5)
+ax.annotate(("Estadia\npromedio\n{}".format(df_estadia_rango['Estadia'][0].round(2))),(0,(df_estadia_rango['Freq(%)'][0].round(2)/2)),ha='center')
+ax.annotate(("Estadia\npromedio\n{}".format(df_estadia_rango['Estadia'][1].round(2))),(1,(df_estadia_rango['Freq(%)'][1].round(2)/2)),ha='center')
+ax.annotate(("Estadia\npromedio\n{}".format(df_estadia_rango['Estadia'][2].round(2))),(2,(df_estadia_rango['Freq(%)'][2].round(2)/2)),ha='center')
+ax.annotate(("Estadia\npromedio\n{}".format(df_estadia_rango['Estadia'][3].round(2))),(3,(df_estadia_rango['Freq(%)'][3].round(2)/2)),ha='center')
+ax.annotate(("Estadia\npromedio\n{}".format(df_estadia_rango['Estadia'][4].round(2))),(4,(df_estadia_rango['Freq(%)'][4].round(2)/2)),ha='center')
+plt.title("Estadía media por rango etario")
+plt.ylabel('Días')
 st.pyplot(fig)
-# Tasa de readmision anual
-#st.metric(label="Tasa de readmision mensual", value=f'{tasa_readmision_mensual:.2f}', delta="%")
-#print("Tasa de readmision anual",tasa_readmision_anual)
 
-st.subheader("Promedio Estadia")
-
-cursor.execute("SELECT timestampdiff(day, admittime, dischtime) FROM admissions")
-data = pd.DataFrame(cursor)
-promedio_estadia = data.values.mean()
-#connection.close()
-#promedio_estadia
-st.metric(label="Promedio ", value=round(promedio_estadia*100), delta="dias")
-
-st.subheader('Tasa mortalidad')
-
-cursor.execute("SELECT hospital_expire_flag, count(hospital_expire_flag) FROM pf_uci.admissions group by 1")
-data = cursor.fetchall()
-tasa_supervivencia = pd.DataFrame(data=data, columns=["estado", "cantidad"])
-suma = tasa_supervivencia["cantidad"].sum()
-sobrevivientes = tasa_supervivencia.loc[0,"cantidad"]
-tasa_supervivencia = sobrevivientes/suma
-connection.close()
-#tasa_supervivencia
-st.metric(label="Tasa de supervivencia ", value=round(tasa_supervivencia*100), delta="%")
+# Separador
+st.markdown('--------------------------------------------------')
