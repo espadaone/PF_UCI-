@@ -6,15 +6,23 @@ import matplotlib.pyplot as plt
 import pymysql
 from datetime import datetime
 import streamlit.components.v1 as components
+import os
 
 st.set_page_config(page_title='UCI: Dashboard general', page_icon=':hospital:')
 
 # Conexion con ddbb
+# Obtener credenciales desde las variables de entorno
+db_host = os.environ.get('DB_HOST')
+db_user = os.environ.get('DB_USER')
+db_password = os.environ.get('DB_PASSWORD')
+db_name = os.environ.get('DB_NAME')
+
+# Conexion con ddbb
 connection = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'administrador',
-    db = 'pf_uci'
+    host=db_host,
+    user=db_user,
+    password=db_password,
+    db=db_name
 )
 cursor = connection.cursor()
 
@@ -47,7 +55,7 @@ promedio_estadia = promedio_estadia.round(0)
 cursor.execute("SELECT count(*), month(admittime) from admissions group by 2 order by 2 asc")
 data_adm_mes = cursor.fetchall()
 
-connection.close()
+
 
 
 st.title('Estadisticas generales')     # Titulo de la página
@@ -257,3 +265,4 @@ st.pyplot(fig)
 
 # Separador
 st.markdown('--------------------------------------------------')
+connection.close()

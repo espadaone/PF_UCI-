@@ -3,16 +3,23 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pymysql
+import os
 
 # Agregamos titulo de la página e icono
 st.set_page_config(page_title='UCI: Estancia del paciente', page_icon=':hospital:')
 
+# Obtener credenciales desde las variables de entorno
+db_host = os.environ.get('DB_HOST')
+db_user = os.environ.get('DB_USER')
+db_password = os.environ.get('DB_PASSWORD')
+db_name = os.environ.get('DB_NAME')
+
 # Conexion con ddbb
 connection = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'administrador',
-    db = 'pf_uci'
+    host=db_host,
+    user=db_user,
+    password=db_password,
+    db=db_name
 )
 cursor = connection.cursor()
 
@@ -124,3 +131,4 @@ with col2:
     procedures = procedures.groupby('short_title', as_index=False).count().sort_values('short_title', ascending=True)
     procedures = procedures['short_title']
     st.write('***:syringe: Procedimientos realizados:***', procedures)
+connection.close()

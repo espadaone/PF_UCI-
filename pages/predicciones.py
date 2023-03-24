@@ -7,14 +7,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
+import os
 
+# Obtener credenciales desde las variables de entorno
+db_host = os.environ.get('DB_HOST')
+db_user = os.environ.get('DB_USER')
+db_password = os.environ.get('DB_PASSWORD')
+db_name = os.environ.get('DB_NAME')
 
-# Conexión a la base de datos mysql
+# Conexion con ddbb
 connection = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'administrador',
-    db = 'pf_uci'
+    host=db_host,
+    user=db_user,
+    password=db_password,
+    db=db_name
 )
 cursor = connection.cursor()
 
@@ -24,7 +30,7 @@ dias_admissions = pd.DataFrame(cursor, columns=('subject_id','admittime','discht
 cursor.execute("SELECT subject_id, dob, gender FROM patients")
 patients = pd.DataFrame(cursor, columns=('subject_id','dob','gender'))
 
-connection.close()
+
 
 # Calculamos dias de hospitalizacion
 dias_admissions['dias transcurridos'] = (dias_admissions['dischtime'] - dias_admissions['admittime']).dt.days
@@ -209,3 +215,4 @@ plt.ylabel('Estadía en días')
 plt.yticks(np.linspace(min(prediccion),max(prediccion),10).round(0))
 plt.grid()
 st.pyplot(fig)        
+connection.close()

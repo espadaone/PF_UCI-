@@ -5,16 +5,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pymysql
 from datetime import datetime
-
+import os
 
 st.set_page_config(page_title='UCI: KPIs y objetivos \01F3AF', page_icon=':hospital:')
 
+# Obtener credenciales desde las variables de entorno
+db_host = os.environ.get('DB_HOST')
+db_user = os.environ.get('DB_USER')
+db_password = os.environ.get('DB_PASSWORD')
+db_name = os.environ.get('DB_NAME')
+
 # Conexion con ddbb
 connection = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'administrador',
-    db = 'pf_uci'
+    host=db_host,
+    user=db_user,
+    password=db_password,
+    db=db_name
 )
 cursor = connection.cursor()
 
@@ -72,7 +78,7 @@ data_estadia = pd.DataFrame(cursor, columns=('subject_id','estadia'))
 promedio_estadia = data_estadia['estadia'].values.mean()
 promedio_estadia = promedio_estadia.round(0)
 
-connection.close()  # Cierre de conexión con la base de datos
+
 
 
 st.title('KPIs y objetivos del negocio')     # Titulo de la página
@@ -220,3 +226,4 @@ plt.bar(mortalidad_rango_etario.index,mortalidad_rango_etario['tasa mortalidad']
 plt.title('Tasa de mortalidad por rango etario')
 plt.xlabel('Edad')
 st.pyplot(fig)
+connection.close()  # Cierre de conexión con la base de datos
