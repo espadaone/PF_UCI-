@@ -1,4 +1,4 @@
-<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/f25cddbc0242a77482c4124d631b4a2ce4654ab8/images/robotic-system-mobile-robots-help-work-workplace-servermobile-robot-help-communication.jpg><p>
+<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/d001d3245a72a4123a2a2b0d0a54eef342f06d47/images/header.jpg><p>
 
 # <h1 align=center> **DATA SCIENCE** </h1>
 
@@ -24,14 +24,28 @@ XXXX
 
 <hr>  
 # **I. MODELO ENTIDAD RELACIÓN**
+
+<br/>
 # **II. DICCIONARIO DE DATOS**
+
+<br/>
 # **III. DATA WAREHOUSE**
+
+<br/>
 # **VI. PIPELINE Y WORKFLOW DE LA INFORMACIÓN**
+
+<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/c31c4bbdec1a6725a0daae09bac0b100a64608da/images/banner%20inferior.png><p>
+  
+<br/>
 # **V. ETL**
+  
+  <br/>
 # **VI. KPIs**
+  
+  <br/>
 # **VII. MODELO DE MACHINE LEARNING**
 
 <br/>
-<p align=center><img src=><p>
+<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/c31c4bbdec1a6725a0daae09bac0b100a64608da/images/banner%20inferior.png><p>
 
 <br/>
