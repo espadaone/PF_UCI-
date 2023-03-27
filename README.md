@@ -1,4 +1,4 @@
-<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/d001d3245a72a4123a2a2b0d0a54eef342f06d47/images/header.jpg><p>
+<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/d001d3245a72a4123a2a2b0d0a54eef342f06d47/images/Header.jpg><p>
 
 # <h1 align=center> **DATA SCIENCE** </h1>
 
@@ -34,7 +34,7 @@ XXXX
 <br/>
 # **VI. PIPELINE Y WORKFLOW DE LA INFORMACIÓN**
 
-<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/c31c4bbdec1a6725a0daae09bac0b100a64608da/images/banner%20inferior.png><p>
+<p align=center><img src=https://github.com/espadaone/PF_UCI-/blob/fb3a251867954bfd6f4a2ec7a0584e9f3c43b808/images/Pipeline.png><p>
   
 <br/>
 # **V. ETL**
