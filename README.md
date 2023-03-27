@@ -2,9 +2,7 @@
 
 # <h1 align=center> **DATA SCIENCE** </h1>
 
-# <h1 align=center>**`Analistas Grupo 8`**</h1>
-
-# <h1 align=center>**`EDA, ETL y Análisis de Datos`**</h1>
+# <h1 align=center>**`EDA, ETL y Análisis de Datos de UCI`**</h1>
 
 <hr>  
 
@@ -19,10 +17,18 @@ XXXX
 
 ## Objetivos
 
-+ XXXX
-+ XXXX
++ Facilitar el entendimiento de los datos, sobre el paciente y  los recursos
++ Mejorar la capacidad de toma de decisiones
++ Aplicar nuevas tecnologías al negocio
 
-<hr>  
+<hr>
+## Objetivos
+`¿Qué SÍ incluye?`
++ Facilitar el entendimiento de los datos, sobre el paciente y  los recursos
++ Mejorar la capacidad de toma de decisiones
++ Aplicar nuevas tecnologías al negocio
+`¿Qué SÍ incluye?`
+<hr>
 # **I. MODELO ENTIDAD RELACIÓN**
 
 <br/>
