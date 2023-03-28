@@ -18,17 +18,9 @@ Este informe presenta un análisis de los datos de 101 pacientes que han sido in
 
 ## Accesos Importantes
 
-Ver Dashboard en PowerBI:
-
-[![VER](images/bDashboard.png)](https://github.com/espadaone/PF_UCI-)
-
-Ver Dashboard en StreamLit:
-
-[![VER](images/bstreamlit.png)](https://github.com/espadaone/PF_UCI-)
-
-Ver presentación Final:
-
-[![VER](images/bPPT.png)](https://github.com/espadaone/PF_UCI-)
+| Ver Dashboard en PowerBI: | Ver Dashboard en StreamLit: | Ver presentación Final: |
+| --- | --- | --- |
+| [![VER](images/bDashboard.png)](https://github.com/espadaone/PF_UCI-) | [![VER](images/bStreamlit.png)](https://github.com/espadaone/PF_UCI-) | [![VER](images/bPPT.png)](https://github.com/espadaone/PF_UCI-) |
 
 ## Objetivos
 
