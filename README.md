@@ -47,7 +47,7 @@ XXXX
 
 El modelo ER de este proyecto se armó según las columnas claves de cada tabla y evitando la redundancia de las referencias. A más detalle se puede observar en la siguiente refresenteación:
 
-<p align=center><img src=images/stack_tecnologico.png><p>
+<p align=center><img src=images/xxx.png><p>
 
 `VER MODELO ENTIDAD RELACIÓN COMPLETO` 👇
 
@@ -65,13 +65,15 @@ A continuación les mostramos un resumen del tecnológico:
 
 <p align=center><img src=images/stack_tecnologico.png><p>
 
+Las herramientas más importantes para el desarrollo y análisis de datos de este proyecto son los siguientes. Microsoft Azure, Python, Power BI, Github y Slack. Microsoft Azure ofrece un entorno virtual que permite la escalabilidad de datos, mayor velocidad de procesamiento, reducción de costo de mantenimiento de servidor local, mayor seguridad y protección de datos. Python es esencial para el análisis exploratorio de datos, el proceso de Extracción, Transformación y Carga de datos, y la automatización de generación de archivos csv para que luego estén disponibles en la máquina virtual de Azure. Power BI es un servicio de análisis de datos de Microsoft que se enfoca en proporcionar visualizaciones interactivas y capacidades de inteligencia empresarial. Por otro lado, Github funciona como el repositorio del desarrollo del proyecto y control de versiones, mientras que Slack es el sistema de comunicación continua del equipo de trabajo.
+
 <br/>
 
 # **VI. PIPELINE Y WORKFLOW DE LA INFORMACIÓN**
 
+Se cuenta con una fuente de datos que está compuesta por un total de 26 archivos `csv`, los cuales son cargados a un archivo de Python. Para la realización del proceso ETL, se utiliza la `librería de pandas` y una vez llevadas a cabo las transformaciones, se procede a validar los datos y comenzar con la carga de la información. Dicha carga se efectúa mediante la `librería de pymysql`, la cual se encarga de generar la conexión con la base de datos. Las tablas requeridas ya se encuentran cargadas en la base de datos y son llenadas conforme se ejecuta la carga, incluyendo la generación de las relaciones necesarias. Una vez terminado el proceso, la base de datos queda lista para ser subida a la `nube de Azure`. La automatización de ETL se realiza con `airflow` y se ejecuta diariamente a las 6 de la mañana, conectándose directamente con Azure. Por último, la data obtenida es consultada y consumida por los procesos de `visualización` y el modelo de `Machine Learning`.
 
 <p align=center><img src=images/Pipeline.png><p>
-
 
 <br/>
 
@@ -79,7 +81,7 @@ A continuación les mostramos un resumen del tecnológico:
 
 ## **1. Extracción**
 
-Para gestionar adecuadamente la información de un hospital, es fundamental contar con un proceso de `ETL eficiente` y preciso que permita `extraer los datos de los csv` entregados por la institución. En este sentido, la utilización de herramientas como Python y Airflow puede resultar muy útil para llevar a cabo este proceso de forma automatizada. Una vez realizada la extracción, transformación y carga de los datos, es importante contar con un lugar seguro y confiable para almacenar la información, como puede ser una base de datos en la nube, como la `SQL de Azure`. De esta forma, se puede disponibilizar la información en tiempo real para los modelos de `predicción` y los `KPIs`. La información que se recolecta del hospital se obtiene de archivos csv que son proporcionados por el mismo. Luego, estos archivos son cargados a través de un archivo .py que utiliza la librería `pandas` para realizar las tareas de ETL. Para llevar a cabo la carga de la información en la base de datos se utiliza la librería `pymysql`, la cual establece la conexión necesaria desde el mismo archivo `.py` de ETL. El proceso completo de ETL se programa mediante `tareas con AirFlow` sobre la base de datos cada cierto tiempo, las cuales serán actualizadas una vez al día a las 3 am. visualización en `Power BI`, lo que permitirá tomar decisiones informadas y en tiempo y forma para mejorar la gestión del hospital.
+La información es recopilada desde archivos csv que son proporcionados por el hospital. Estos archivos son luego cargados en un archivo `.py` con la ayuda de la librería `pandas`, y se almacenan en un dataframe para su posterior transformación y carga.
 
 ## **2. Transformación**
 
