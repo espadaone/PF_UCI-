@@ -39,7 +39,7 @@ Este informe presenta un análisis de los datos de 101 pacientes que han sido in
 + Visualización de datos
 + Estimar tasas
  
-`¿Qué SÍ incluye?`
+`¿Qué NO incluye?`
 
 + Sugerencias de medicación
 + Administrar los recursos
