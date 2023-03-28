@@ -24,7 +24,7 @@ Ver Dashboard en PowerBI:
 
 Ver Dashboard en StreamLit:
 
-[![VER](images/bStreamlit.png)](https://github.com/espadaone/PF_UCI-)
+[![VER](images/bstreamlit.png)](https://github.com/espadaone/PF_UCI-)
 
 Ver presentación Final:
 
