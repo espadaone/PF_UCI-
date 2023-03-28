@@ -16,6 +16,20 @@ Este informe presenta un análisis de los datos de 101 pacientes que han sido in
 
 <hr>
 
+## Accesos Importantes
+
+Ver Dashboard en PowerBI:
+
+[![VER](images/bDashboard.png)](https://github.com/espadaone/PF_UCI-)
+
+Ver Dashboard en StreamLit:
+
+[![VER](images/bStreamlit.png)](https://github.com/espadaone/PF_UCI-)
+
+Ver presentación Final:
+
+[![VER](images/bPPT.png)](https://github.com/espadaone/PF_UCI-)
+
 ## Objetivos
 
 + Facilitar el entendimiento de los datos, sobre el paciente y  los recursos
@@ -51,7 +65,7 @@ El modelo ER de este proyecto se armó según las columnas claves de cada tabla 
 
 `VER MODELO ENTIDAD RELACIÓN COMPLETO` 👇
 
-[![VER](images/C.jpg)](https://github.com/espadaone/PF_UCI-/blob/bd0624f0bc79de89466ceb253129db5476031245/Diccionario_datos_actualizado.pdf)
+[![VER](images/bER.png)](https://github.com/espadaone/PF_UCI-/blob/bd0624f0bc79de89466ceb253129db5476031245/Diccionario_datos_actualizado.pdf)
 
 <br/>
 
@@ -174,6 +188,8 @@ La tasa de cancelación de procedimientos en una Unidad de Cuidados Intensivos (
 `Duración media de estancia en el hospital`
 
 La duración media de estancia en el hospital en UCI (Unidad de Cuidados Intensivos) se refiere al tiempo promedio que los pacientes pasan en la UCI antes de ser dados de alta o trasladados a otra área del hospital. Es un indicador importante de la eficacia del tratamiento y la atención en la UCI, ya que una estancia prolongada en la UCI puede indicar complicaciones médicas o una recuperación lenta.
+
+A continuación dejamos el acceso al Dashboard.
 
   <br/>
 
