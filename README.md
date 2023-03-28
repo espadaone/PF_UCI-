@@ -12,7 +12,7 @@
 
 ## Contexto
 
-XXXX
+Este informe presenta un análisis de los datos de 101 pacientes que han sido ingresados en el área de Cuidados Intensivos (UCI) del Hospital, generando un total de 130 registros. Los datos se recopilaron de 26 tablas que contienen información relevante, como estudios médicos realizados, prescripciones médicas y otros datos clínicos. Sin embargo, una de las tablas no posee información. La tabla con más registros es CHARTEVENTS, con 758,355 datos. Es importante destacar que las fechas presentadas en el conjunto de datos están enmascaradas y las fechas con años del siglo XIX (1800) corresponden a personas mayores de 89 años. La estacionalidad de las fechas de ingreso/egreso y eventos se preserva según el hemisferio norte (verano en el hemisferio norte es entre junio y septiembre).
 
 <hr>
 
@@ -47,13 +47,11 @@ XXXX
 
 El modelo ER de este proyecto se armó según las columnas claves de cada tabla y evitando la redundancia de las referencias. A más detalle se puede observar en la siguiente refresenteación:
 
-<p align=center><img src=images/xxx.png><p>
+<p align=center><img src=images/Entity_Relationship_Diagram.jpg><p>
 
 `VER MODELO ENTIDAD RELACIÓN COMPLETO` 👇
 
 [![VER](images/C.jpg)](https://github.com/espadaone/PF_UCI-/blob/bd0624f0bc79de89466ceb253129db5476031245/Diccionario_datos_actualizado.pdf)
-
-
 
 <br/>
 
@@ -87,7 +85,7 @@ La información es recopilada desde archivos csv que son proporcionados por el h
 
 Una vez extraida la data se realizaron las siguientes transformaciones:
 
-**`1. Cambiar formato de las columnas de fechas`**
+`1. Cambiar formato de las columnas de fechas`
 
 Las columnas que incluian fechas se cambió el formato de texto a datetime.
 
@@ -151,11 +149,49 @@ Finalmente, se ha automatizado el proceso ETL utilizando un programador de tarea
 
   <br/>
 
-# **VI. KPIs**
-  
+# **VI. KPIs y DASHBOARD**
+
+`Tasa de readmisión`
+
+La tasa de readmisión en UCI de un hospital se refiere al porcentaje de pacientes que han sido dados de alta de la unidad de cuidados intensivos (UCI) de un hospital y que han tenido que ser readmitidos en la UCI dentro de un período de tiempo determinado.
+
+`Tasa de supervivencia`
+
+La tasa de supervivencia en la unidad de cuidados intensivos (UCI) de un hospital se refiere a la proporción de pacientes que sobreviven a su estadía en la UCI. En otras palabras, es el porcentaje de pacientes que ingresan en la UCI y sobreviven a su enfermedad o lesión y son dados de alta del hospital.
+
+`Tasa de mortalidad`
+
+La tasa de mortalidad en UCI (Unidad de Cuidados Intensivos) de un hospital es el porcentaje de pacientes que fallecen mientras reciben atención médica en la UCI de ese hospital. Esta tasa se calcula dividiendo el número de pacientes que fallecieron en la UCI por el número total de pacientes atendidos en la UCI durante un período de tiempo determinado, generalmente un año.
+
+`Tasa de Pacientes con seguro privado`
+
+La "tasa de pacientes con seguro privado en UCI de un hospital" se refiere a la proporción de pacientes que son admitidos en la unidad de cuidados intensivos (UCI) de un hospital y que tienen un seguro de salud privado en comparación con aquellos que tienen un seguro de salud público o no tienen seguro de salud en absoluto.
+
+`Tasa cancelación de procedimientos`
+
+La tasa de cancelación de procedimientos en una Unidad de Cuidados Intensivos (UCI) de un hospital se refiere a la proporción de procedimientos programados que se cancelan antes de su realización. Estos procedimientos pueden incluir cirugías, intervenciones invasivas, pruebas diagnósticas y otros procedimientos que se planifican para el cuidado de pacientes críticos en la UCI.
+
+`Duración media de estancia en el hospital`
+
+La duración media de estancia en el hospital en UCI (Unidad de Cuidados Intensivos) se refiere al tiempo promedio que los pacientes pasan en la UCI antes de ser dados de alta o trasladados a otra área del hospital. Es un indicador importante de la eficacia del tratamiento y la atención en la UCI, ya que una estancia prolongada en la UCI puede indicar complicaciones médicas o una recuperación lenta.
+
   <br/>
 
 # **VII. MODELO DE MACHINE LEARNING**
+
+Para la elaboración del modelo de Machine Learning se ha usado data las siguientes tablas: admissions, patients y prescriptions. Con esta data se ha realizado la predicción de estadía de los pacientes. Para la graficación de los resultados se ha dividido la predicciones en rangos etarios de: '<= 30 años', '30 a 49 años', '50 a 64 años', '65 a 79 años' y '>= 80 años'. El resultado de predicción se actualiza en tiempo real. A continuación mostraremos una visualización previa de los resultados.
+
+<p align=center><img src=images/predicciones.jpg><p>
+
+La predicción de la estadía de los pacientes en el área de UCI de un hospital puede tener varios usos importantes. Algunos de ellos son:
+
+1. Planificación y gestión de recursos: Los hospitales pueden utilizar los resultados de la predicción para planificar y gestionar sus recursos de manera más efectiva. Por ejemplo, pueden asignar personal adicional en la UCI cuando se espera que la estadía de los pacientes sea más larga de lo habitual, o pueden reservar camas en la UCI para pacientes que se espera que requieran atención intensiva durante un período más prolongado.
+
+2. Asignación de recursos médicos: La predicción de la estadía de los pacientes en la UCI también puede ayudar a los médicos a tomar decisiones más informadas sobre la asignación de recursos médicos. Por ejemplo, pueden decidir cuánto tiempo deben permanecer los pacientes en ventilación mecánica o cuándo pueden ser transferidos a unidades de cuidados menos intensivos.
+
+3. Reducción de costos: La predicción de la estadía de los pacientes en la UCI también puede ayudar a los hospitales a reducir costos innecesarios. Por ejemplo, pueden evitar la sobreutilización de recursos médicos y reducir la duración de la estadía de los pacientes en la UCI cuando no es necesaria.
+
+4. Mejora de la calidad de atención: Al predecir la estadía de los pacientes en la UCI, los hospitales pueden garantizar que los pacientes reciban la atención adecuada durante todo el tiempo que estén en la UCI. Esto puede mejorar la calidad de atención que se brinda a los pacientes, lo que puede llevar a mejores resultados de salud y a una mayor satisfacción del paciente.
 
 <br/>
 
