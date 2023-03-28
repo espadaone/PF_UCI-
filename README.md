@@ -11,6 +11,7 @@
 <hr>
 
 ## Contexto
+
 XXXX
 
 <hr>
@@ -22,7 +23,8 @@ XXXX
 + Aplicar nuevas tecnologías al negocio
 
 <hr>
-## Objetivos
+
+## Alcance
 
 `¿Qué SÍ incluye?`
 
