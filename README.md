@@ -75,7 +75,7 @@ Las herramientas más importantes para el desarrollo y análisis de datos de est
 
 # **VI. PIPELINE Y WORKFLOW DE LA INFORMACIÓN**
 
-Se cuenta con una fuente de datos que está compuesta por un total de 26 archivos `csv`, los cuales son cargados a un archivo de Python. Para la realización del proceso ETL, se utiliza la `librería de pandas` y una vez llevadas a cabo las transformaciones, se procede a validar los datos y comenzar con la carga de la información. Dicha carga se efectúa mediante la `librería de pymysql`, la cual se encarga de generar la conexión con la base de datos. Las tablas requeridas ya se encuentran cargadas en la base de datos y son llenadas conforme se ejecuta la carga, incluyendo la generación de las relaciones necesarias. Una vez terminado el proceso, la base de datos queda lista para ser subida a la `nube de Azure`. La automatización de ETL se realiza con `airflow` y se ejecuta diariamente a las 6 de la mañana, conectándose directamente con Azure. Por último, la data obtenida es consultada y consumida por los procesos de `visualización` y el modelo de `Machine Learning`.
+Se cuenta con una fuente de datos que está compuesta por un total de 26 archivos `csv`, los cuales son cargados a un archivo de Python. Para la realización del proceso ETL, se utiliza la `librería de pandas` y una vez llevadas a cabo las transformaciones, se procede a validar los datos y comenzar con la carga de la información. Dicha carga se efectúa mediante la `librería de pymysql`, la cual se encarga de generar la conexión con la base de datos. Las tablas requeridas ya se encuentran cargadas en la base de datos y son llenadas conforme se ejecuta la carga, incluyendo la generación de las relaciones necesarias. Una vez terminado el proceso, la base de datos queda lista para ser subida a la `nube de Azure`. La automatización de ETL se realiza con `azure data factory studio` y se ejecuta diariamente a las 6 de la mañana, conectándose directamente con Azure. Por último, la data obtenida es consultada y consumida por los procesos de `visualización` y el modelo de `Machine Learning`.
 
 <p align=center><img src=images/Pipeline3.png><p>
 
@@ -148,9 +148,9 @@ La base de datos está conformada por 25 tablas. Cada tabla lleva los mismos nom
 
 Una vez que los datos se han transformado, se pueden cargar en un destino deseado, como un archivo CSV o una base de datos. Las sentencias son construidas respetando las PK y FK, además de los formatos de las tablas.
 
-`Automatización de tareas con AirFlow`
+`Automatización de tareas con azure data factory studio`
 
-Finalmente, se ha automatizado el proceso ETL utilizando un programador de tareas o una herramienta de orquestación como Apache Airflow para ejecutar el pipeline ETL en intervalos regulares.
+Finalmente, se ha automatizado el proceso ETL utilizando un programador de tareas o una herramienta de orquestación como azure data factory studio para ejecutar el pipeline ETL en intervalos regulares.
 
 
   <br/>
