@@ -67,7 +67,7 @@ Para asegurar el éxito de este proyecto se ha utilizado diferentes herramientas
 
 A continuación les mostramos un resumen del tecnológico:
 
-<p align=center><img src=images/stack_tecnologico.png><p>
+<p align=center><img src=images/stack_tecnologico1.png><p>
 
 Las herramientas más importantes para el desarrollo y análisis de datos de este proyecto son los siguientes. Microsoft Azure, Python, Power BI, Github y Slack. Microsoft Azure ofrece un entorno virtual que permite la escalabilidad de datos, mayor velocidad de procesamiento, reducción de costo de mantenimiento de servidor local, mayor seguridad y protección de datos. Python es esencial para el análisis exploratorio de datos, el proceso de Extracción, Transformación y Carga de datos, y la automatización de generación de archivos csv para que luego estén disponibles en la máquina virtual de Azure. Power BI es un servicio de análisis de datos de Microsoft que se enfoca en proporcionar visualizaciones interactivas y capacidades de inteligencia empresarial. Por otro lado, Github funciona como el repositorio del desarrollo del proyecto y control de versiones, mientras que Slack es el sistema de comunicación continua del equipo de trabajo.
 
@@ -77,7 +77,7 @@ Las herramientas más importantes para el desarrollo y análisis de datos de est
 
 Se cuenta con una fuente de datos que está compuesta por un total de 26 archivos `csv`, los cuales son cargados a un archivo de Python. Para la realización del proceso ETL, se utiliza la `librería de pandas` y una vez llevadas a cabo las transformaciones, se procede a validar los datos y comenzar con la carga de la información. Dicha carga se efectúa mediante la `librería de pymysql`, la cual se encarga de generar la conexión con la base de datos. Las tablas requeridas ya se encuentran cargadas en la base de datos y son llenadas conforme se ejecuta la carga, incluyendo la generación de las relaciones necesarias. Una vez terminado el proceso, la base de datos queda lista para ser subida a la `nube de Azure`. La automatización de ETL se realiza con `airflow` y se ejecuta diariamente a las 6 de la mañana, conectándose directamente con Azure. Por último, la data obtenida es consultada y consumida por los procesos de `visualización` y el modelo de `Machine Learning`.
 
-<p align=center><img src=images/Pipeline2.png><p>
+<p align=center><img src=images/Pipeline3.png><p>
 
 <br/>
 
